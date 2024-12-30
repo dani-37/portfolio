@@ -1,13 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Moderustic:wght@300..800&display=swap");
+
+@font-face {
+  font-family: "aptos";
+  src: url("./fonts/aptos.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url('./background.png');
+  background-blend-mode:saturation;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+  /* background-color: #a7c8a8 ;  */
+  /* #C5D8C1 */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  color: #1a1a19;
+  /* #494F49 */
+}
+
+.content {
+  height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+
+  /* border-left: 25px solid rgb(197, 203, 223);
+  border-right: 25px solid rgb(197, 203, 223);
+
+  border-bottom: 17px solid rgb(197, 203, 223);
+  border-top: 17px solid rgb(197, 203, 223); */
+}
+
+.frame {
+  /* border: 1px solid white; */
+  height: calc(100vh - 37px);
+  width: calc(100vw - 100px);
+}
+
+.fade-enter,
+.fade-exit {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1000ms ease-in, visibility 0ms ease-in;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1000ms ease-out, visibility 0ms 1000ms ease-out;
+}
+
+.rectangle {
+  width: 143px;
+  height: 45px;
+  background-color: rgba(246, 244, 243, 0.75);
+  transform: rotate(4.23deg);
+  z-index: -10;
+  position: absolute;
+  top: 26px;
+  left: 2px;
+}
+
+nav {
+  position: relative; /* Required for pseudo-element positioning */
+  background-color: rgba(102, 153, 204, 0.6);
+  height: 215px;
+  width: 155px;
+  clip-path: polygon(0% 0%, 92% 2%, 100% 100%, 0% 100%);
+  padding: 20px;
+  padding-left: 12px;
+  font-size: x-large;
+  margin-left: 10px;
+  z-index: 1; /* Ensure content is above the pseudo-element */
+}
+
+nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 92% 2%, 100% 100%, 0% 100%);
+  background-color: transparent;
+  border: 2px solid rgba(246, 244, 243, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+li {
+  position: relative;
+  width: 100%;
+  transition: transform 0.3s ease, font-style 0s; /* Apply transition to both */
+}
+
+li:hover {
+  font-style: italic;
+  transform: translateX(3px); /* Move 10px to the right */
+}
+
+.active {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.active::before {
+  position: absolute;
+  left: -36px;
+  top: 5px;
+  content: "";
+  width: 20px;
+  height: 100%;
+  background-color: rgba(246, 244, 243, 1);
+  /* #C5D8C1; */
+  transform: rotate(45deg);
+}
+
+.route-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
+.route-container > div {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensures the canvas is behind other elements */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 85, 99, 0.7) transparent;
+  padding-right: 15px;
+}
+
+b {
+  font-weight: 600;
+}
+
+.fade-edge {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 30px,
+    black calc(100% - 30px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 30px,
+    black calc(100% - 30px),
+    transparent 100%
+  );
 }
