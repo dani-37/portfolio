@@ -31,19 +31,19 @@ const Page = ({ title, description, content, link, dates, page='work' }:
     }, []);
   
     return (
-      <div className="relative w-full max-h-[85vh] overflow-visible flex flex-col cursor-default">
-        <div className="flex gap-[12px] -ml-[4.45rem] items-center">
-            <Tooltip title={<p className='font-mono'> Back </p>} placement="left">
+      <div className="relative w-full md:max-h-[85vh] overflow-visible flex flex-col cursor-default">
+        <div className="flex gap-[12px] md:-ml-[4.45rem] items-center pt-5 md:pt-0">
+            <Tooltip title={<p className='font-mono'> Back </p>} placement="left" className='hidden md:block'>
                 <Link to={'/' + page} className="w-14 h-10 group flex items-center cursor-pointer">
-                    <p className="text-[2.7rem] w-16 ml-3 mb-3 group-hover:ml-2 transition-all cursor-pointer pointer-events-none text-gray-800 opacity-70 group-hover:opacity-100" >
+                    <p className="text-[2.7rem] w-16 ml-3 -mt-4 group-hover:ml-2 transition-all cursor-pointer pointer-events-none text-gray-800 opacity-70 group-hover:opacity-100" >
                         {'<'}
                     </p>
                 </Link>
             </Tooltip>
 
-            <h2 className="font-mono text-[3.5rem] flex justify-between w-full h-max items-end">
+            <h2 className="font-mono text-[3.5rem] flex flex-col md:flex-row justify-between w-full h-max md:items-end">
                 <TextAnimator text={title} />
-                <div className='w-full h-full flex justify-end min-h-full text-base pr-[20px] text-gray-800 mb-8'>
+                <div className='w-full h-full flex md:justify-end min-h-full text-base pr-[20px] text-gray-800 mb-8'>
                     {dates}
                 </div>
             </h2>

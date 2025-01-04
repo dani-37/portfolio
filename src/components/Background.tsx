@@ -18,7 +18,7 @@ const ThreeBackground: React.FC = () => {
     );
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight * 1.5);
 
     // Append renderer to the DOM
     if (mountRef.current) {
@@ -26,10 +26,10 @@ const ThreeBackground: React.FC = () => {
     }
 
     // Geometry and Material
-    const geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+    const geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight * 1.5);
 
     const uniforms = {
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight * 1.5) },
       u_mouse: { value: new THREE.Vector2(0, 0) },
     };
 
@@ -106,7 +106,7 @@ const ThreeBackground: React.FC = () => {
     // Handle window resize
     const onWindowResize = () => {
       const width = window.innerWidth;
-      const height = window.innerHeight;
+      const height = window.innerHeight * 1.5;
 
       // Update renderer and camera
       renderer.setSize(width, height);

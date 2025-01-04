@@ -21,7 +21,7 @@ const Graphext = () => {
           <img
             src="/images/graphext.png"
             alt="Description of the image"
-            className="w-1/2 object-cover float-right p-3 rounded-[1rem]"
+            className="w-full md:w-1/2 object-cover float-right p-3 rounded-[1rem]"
           />
 
           <p>

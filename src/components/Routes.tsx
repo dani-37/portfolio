@@ -18,11 +18,15 @@ import Webs from '../pages/projects/Webs.tsx';
 
 function AnimatedRoutes() {
     const location = useLocation();
+    const isPhone = () => {
+      return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+    };
+
     return (
       <TransitionGroup component={null}> 
         <CSSTransition
           key={location.pathname} 
-          timeout={1000}
+          timeout={isPhone() ? 0 : 1000}
           classNames="fade"
         >
           <Routes location={location}>

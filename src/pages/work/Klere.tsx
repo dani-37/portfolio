@@ -18,10 +18,10 @@ const Klere = () => {
           </p>
 
           <p>
-            In my role as a <b>biodiversity data analyst</b> I use GIS (Geographic Information Systems) and Python to analyse UK habitat data. 
+            I use <b>GIS</b> (Geographic Information Systems) and <b>Python</b> to analyse UK habitat data. 
             Combining these datasets with the DEFRA Biodiversity Metric, a UK government metric that 
             became statutory this February, I then create density maps of the UK. We use these 
-            maps to analyse the biodiversity opportunity cost of a company's direct land use.
+            maps to analyse the <b>biodiversity opportunity cost</b> of a company's direct land use.
           </p>
 
           <p>
@@ -34,7 +34,7 @@ const Klere = () => {
           <video
             src="/images/platform_demo.mov"
             controls
-            className="h-60 object-cover rounded-md float-left mr-6 mb-6"
+            className="w-full md:w-auto md:h-60 object-cover rounded-md float-left mr-6 mb-6"
           />
 
           <p>

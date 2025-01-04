@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 const About = () => {
   return (
-    <div className='text-right w-2/3 flex flex-col justify-end items-end cursor-default'>
+    <div className='text-right md:w-2/3 flex flex-col justify-end items-end cursor-default'>
       <h1 className='font-mono text-2xl'>
         <p > 
           <TextAnimator text='I use data to focus'/> 

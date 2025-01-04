@@ -17,7 +17,7 @@ const Footprints = () => {
         <img
           src="/images/bd_growth.png"
           alt="Description of the image"
-          className="w-2/5 object-cover rounded-lg float-right ml-4 mb-2"
+          className="w-full md:w-2/5 object-cover rounded-lg md:float-right md:ml-4 mb-2"
         />
 
         <p>
@@ -71,7 +71,7 @@ const Footprints = () => {
         <img
           src="/images/bd_dash.png"
           alt="Description of the image"
-          className="w-2/5 object-cover rounded-lg float-left mr-4 my-2"
+          className="w-full md:w-2/5 object-cover rounded-lg md:float-left md:mr-4 my-2"
         />
 
         <p>
