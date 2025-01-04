@@ -14,18 +14,9 @@ function RedirectHandler() {
     const toPath = urlParams.get("to");
 
     if (from404 && toPath) {
-      // Clear the query params before navigating
       urlParams.delete("redirectFrom");
       urlParams.delete("to");
-
-      // Replace the URL so the user doesn’t see the query params
-      window.history.replaceState(
-        {},
-        "",
-        window.location.pathname + "?" + urlParams.toString()
-      );
-
-      // Then navigate to the intended path
+      window.history.replaceState({}, "", window.location.pathname + "?" + urlParams.toString());
       navigate(toPath, { replace: true });
     }
   }, [navigate]);

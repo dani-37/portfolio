@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import AnimatedRoutes from './components/Routes.tsx';
 import ThreeBackground from './components/Background.tsx';
 import { Menu, X } from 'lucide-react';
@@ -10,14 +10,11 @@ import './index.css';
 ReactGA.initialize("G-8SZZJKC9XT");
 
 function App() {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location]);
+  const location = useLocation();
+  useEffect(() => { ReactGA.send({ hitType: "pageview", page: location.pathname }); }, [location]);
 
   return (
     <div>
