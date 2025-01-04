@@ -41,7 +41,7 @@ const Page = ({ title, description, content, link, dates, page='work' }:
                 </Link>
             </Tooltip>
 
-            <h2 className="font-mono text-[3.5rem] flex flex-col md:flex-row justify-between w-full h-max md:items-end">
+            <h2 className="font-mono text-5xl md:text-[3.5rem] flex flex-col md:flex-row justify-between w-full h-max md:items-end">
                 <TextAnimator text={title} />
                 <div className='w-full h-full flex md:justify-end min-h-full text-base pr-[20px] text-gray-800 mb-8'>
                     {dates}
@@ -49,7 +49,7 @@ const Page = ({ title, description, content, link, dates, page='work' }:
             </h2>
         </div>
       
-        <p className="text-xl font-mono text-gray-800">
+        <p className="md:text-xl font-mono text-gray-800 -mt-4 md:mt-0">
           {description}
           {link && (
             <Tooltip title={<p className='font-mono'> Go to site </p>} placement="right">
@@ -67,7 +67,7 @@ const Page = ({ title, description, content, link, dates, page='work' }:
     
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto custom-scrollbar fade-edge" ref={scrollableDivRef}>
-          <div className="text-gray-600 text-[1.1rem] font-aptos py-5">
+          <div className="text-gray-600 md:text-[1.1rem] font-aptos py-5">
             {content}
           </div>
         </div>

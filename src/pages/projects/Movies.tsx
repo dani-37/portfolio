@@ -9,7 +9,7 @@ const Movies = () => {
         
         <img
           src="/images/graph.png"
-          alt="Description of the image"
+          alt="Network graph of movies"
           className="w-42 h-60 object-cover rounded float-right pl-2 pb-2"
         />
 
@@ -35,7 +35,7 @@ const Movies = () => {
 
         <img
           src="/images/histogram.png"
-          alt="Description of the image"
+          alt="Exploratory data analysis of movie dataset"
           className="w-42 h-60 object-cover rounded float-left pr-2 pb-2"
         />
 
@@ -61,7 +61,7 @@ const Movies = () => {
 
         <img
           src="/images/romcom.png"
-          alt="Description of the image"
+          alt="Romcom movie recommendation example"
           className="w-full object-cover pb-5"
         />
 
@@ -69,7 +69,7 @@ const Movies = () => {
 
         <img
           src="/images/tarantino.png"
-          alt="Description of the image"
+          alt="Tarantino movie recommendation example"
           className="w-full object-cover pb-5"
         />
 
@@ -77,7 +77,7 @@ const Movies = () => {
 
         <img
           src="/images/family.png"
-          alt="Description of the image"
+          alt="Family friendly movie recommendation example"
           className="w-full object-cover pb-5"
         />
 

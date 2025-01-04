@@ -25,7 +25,7 @@ const Webs = () => {
                 <a href="https://juliaoprzondek.uk" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/julia_o.png"
-                        alt="Description of the image"
+                        alt="Julia's website"
                         className="rounded-lg"
                     />
                 </a>
@@ -42,7 +42,7 @@ const Webs = () => {
                 <a href="https://tomaszgola.eu" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/tomasz_g.png"
-                        alt="Description of the image"
+                        alt="Tomek's website"
                         className="rounded-lg"
                     />
                 </a>
@@ -59,7 +59,7 @@ const Webs = () => {
                 <a href="https://dash.klereearth.uk/" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/platform.png"
-                        alt="Description of the image"
+                        alt="Klere dashboard"
                         className="rounded-lg"
                     />
                 </a>
@@ -76,7 +76,7 @@ const Webs = () => {
             <div className="w-3/5 object-cover hover:shadow-lg transition-all" >
                     <img
                         src="/images/olympics.png"
-                        alt="Description of the image"
+                        alt="Olympic bets website"
                         className="rounded-lg"
                     />
                 </div>

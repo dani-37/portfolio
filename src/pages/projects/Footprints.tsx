@@ -16,7 +16,7 @@ const Footprints = () => {
 
         <img
           src="/images/bd_growth.png"
-          alt="Description of the image"
+          alt="Biodiversity growth over time for different habitats"
           className="w-full md:w-2/5 object-cover rounded-lg md:float-right md:ml-4 mb-2"
         />
 
@@ -36,7 +36,7 @@ const Footprints = () => {
 
         <img
           src="/images/bd_map.png"
-          alt="Description of the image"
+          alt="Biodiversity density map of the uk"
           className="w-1/3 object-cover rounded-lg float-left mr-4 mb-2"
         />
 
@@ -44,7 +44,7 @@ const Footprints = () => {
           This allows us to create biodiversity maps of the UK, which in turn can be used to measure the biodiversity impact
           of a company's <b>direct land use</b>. This was done by combining a variety of publicly available habitat maps - it was a very 
           interesting way to learn about <b>Geographic Information Systems</b> (GIS), as well as using them in conjunction with 
-          Python (GeoPandas) and SQL (PostGIS).
+           <b> Python</b> (GeoPandas) and <b>SQL</b> (PostGIS).
         </p>
 
         <p>
@@ -56,7 +56,7 @@ const Footprints = () => {
 
         <img
           src="/images/sankey.png"
-          alt="Description of the image"
+          alt="Sankey diagram of various industries' inputs"
           className="w-1/2 object-cover rounded-lg float-right mr-4 my-2"
         />
 
@@ -70,7 +70,7 @@ const Footprints = () => {
 
         <img
           src="/images/bd_dash.png"
-          alt="Description of the image"
+          alt="Biodiversity footprint dashboard screenshot"
           className="w-full md:w-2/5 object-cover rounded-lg md:float-left md:mr-4 my-2"
         />
 

@@ -65,7 +65,7 @@ function App() {
             </header>
 
             <main className="flex-grow relative overflow-auto md:hidden">
-              <div className="layout-preserve pb-10 px-6">
+              <div className="layout-preserve pb-10 px-6 fade-edge">
                 <AnimatedRoutes />
               </div>
             </main>

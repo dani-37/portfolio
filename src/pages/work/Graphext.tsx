@@ -20,7 +20,7 @@ const Graphext = () => {
 
           <img
             src="/images/graphext.png"
-            alt="Description of the image"
+            alt="Graphs from my article"
             className="w-full md:w-1/2 object-cover float-right p-3 rounded-[1rem]"
           />
 

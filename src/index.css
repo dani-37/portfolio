@@ -49,9 +49,9 @@ body {
   border-top: 17px solid rgb(197, 203, 223); */
 }
 
-/* * {
+.debug {
   outline: 1px solid red;
-} */
+}
 
 .layout-preserve {
   position: relative; 
@@ -88,11 +88,13 @@ body {
     align-items: flex-end;
   }
 
-  li:hover {
-    font-style: default;
-    transform: none; /* Move 10px to the right */
-  }
+}
 
+@media (pointer: coarse) {
+  li:hover {
+    font-style: normal;
+    transform: none;
+  }
 }
 
 .fade-enter,
@@ -160,7 +162,7 @@ li {
 
 li:hover {
   font-style: italic;
-  transform: translateX(3px); /* Move 10px to the right */
+  transform: translateX(3px);
 }
 
 .active {

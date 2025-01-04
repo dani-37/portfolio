@@ -7,7 +7,7 @@ const Experience = ({name, description}:{name:string, description:string}) => {
       <div className='flex flex-col items-end'>
         <Link to={name} className='cursor-pointer group'>
             <ul className='w-full flex justify-end'>
-            <li className='font-mono text-6xl w-min group-hover:underline group-hover:cursor-pointer group-hover:italic group-hover:translate-x-1 text-nowrap'
+            <li className='font-mono text-6xl w-min group-hover:underline group-hover:cursor-pointer md:group-hover:italic md:group-hover:translate-x-1 text-nowrap'
               style={{ textDecoration: 'underline', textDecorationColor: 'white', textDecorationThickness: '3px' }}>
               <TextAnimator text={name} />
             </li>

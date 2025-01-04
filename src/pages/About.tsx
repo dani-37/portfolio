@@ -18,7 +18,7 @@ const About = () => {
 
       <div className='h-[2px] w-full bg-white my-3'/>
 
-      <div className='space-y-3 font-aptos text-[1.15rem]'>
+      <div className='space-y-3 font-aptos md:text-[1.15rem]'>
         <p>
         I am a statistician focused on sustainable development. I transform data into climate action by blending analysis, visualizations, and sustainability strategy.</p>
         <p>

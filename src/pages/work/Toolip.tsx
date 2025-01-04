@@ -13,7 +13,7 @@ const Toolip = () => {
 
           <img
             src="/images/toolip.jpg"
-            alt="Description of the image"
+            alt="Toolip members picture"
             className="w-[45%] object-cover float-right p-3 rounded-[1rem]"
           />
 

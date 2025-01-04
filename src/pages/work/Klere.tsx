@@ -7,7 +7,7 @@ const Klere = () => {
         <div className="relative space-y-5 text-gray-800 -mt-5">
           <img
             src="/images/bd_map.png"
-            alt="Description of the image"
+            alt="Biodiversity density map of the uk"
             className="w-1/3 object-cover rounded float-right pl-2 pb-2"
           />
 
