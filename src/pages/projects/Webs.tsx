@@ -21,15 +21,15 @@ const Webs = () => {
         </p>
 
         <div className="flex flex-col flex-wrap space-y-8 pt-2">
-            <div className="w-full flex items-start space-x-5">
-                <a href="https://juliaoprzondek.uk" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
+            <div className="w-full flex flex-col md:flex-row items-start md:space-x-5">
+                <a href="https://juliaoprzondek.uk" className="w-full md:w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/julia_o.png"
                         alt="Julia's website"
                         className="rounded-lg"
                     />
                 </a>
-                <div className="w-2/3">
+                <div className="w-full pt-4 md:pt-0 md:w-2/3">
                     <p className="font-semibold pb-4">Julia Oprzondek</p>
                     <p>
                         Made for my communications/arts friend, I wanted it to show a quirky and artistic side. We set on a simple but 
@@ -38,15 +38,15 @@ const Webs = () => {
                 </div>
             </div>
 
-            <div className="w-full flex items-start space-x-5">
-                <a href="https://tomaszgola.eu" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
+            <div className="w-full flex flex-col md:flex-row items-start md:space-x-5">
+                <a href="https://tomaszgola.eu" className="w-full md:w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/tomasz_g.png"
                         alt="Tomek's website"
                         className="rounded-lg"
                     />
                 </a>
-                <div className="w-2/3">
+                <div className="w-full pt-4 md:pt-0 md:w-2/3">
                     <p className="font-semibold pb-4">Tomasz Gola</p>
                     <p>
                         A more academic look for my PhD friend. Showcases a list of articles with a single-page approach. It's got 
@@ -55,15 +55,15 @@ const Webs = () => {
                 </div>
             </div>
 
-            <div className="w-full flex items-start space-x-5">
-                <a href="https://dash.klereearth.uk/" className="w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
+            <div className="w-full flex flex-col md:flex-row items-start md:space-x-5">
+                <a href="https://dash.klereearth.uk/" className="w-full md:w-3/5 object-cover hover:shadow-lg transition-all" target="_blank">
                     <img
                         src="/images/platform.png"
                         alt="Klere dashboard"
                         className="rounded-lg"
                     />
                 </a>
-                <div className="w-2/3">
+                <div className="w-full pt-4 md:pt-0 md:w-2/3">
                     <p className="font-semibold pb-4">Klere Dashboard</p>
                     <p>
                         Klere's dashboard for integrated nature and carbon footprints. This is the most sophisticated site, 
@@ -72,15 +72,15 @@ const Webs = () => {
                 </div>
             </div>
 
-            <div className="w-full flex items-start space-x-5">
-            <div className="w-3/5 object-cover hover:shadow-lg transition-all" >
+            <div className="w-full flex flex-col md:flex-row items-start md:space-x-5">
+            <div className="w-full md:w-3/5 object-cover hover:shadow-lg transition-all" >
                     <img
                         src="/images/olympics.png"
                         alt="Olympic bets website"
                         className="rounded-lg"
                     />
                 </div>
-                <div className="w-2/3">
+                <div className="w-full pt-4 md:pt-0 md:w-2/3">
                     <p className="font-semibold pb-4">Olympics Bets</p>
                     <p>
                         I made a site for my friends and I to bet on the olympics! It had all the flags and icons 

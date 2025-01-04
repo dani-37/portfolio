@@ -10,7 +10,7 @@ const Movies = () => {
         <img
           src="/images/graph.png"
           alt="Network graph of movies"
-          className="w-42 h-60 object-cover rounded float-right pl-2 pb-2"
+          className="w-full md:w-1/2 object-cover rounded float-right pl-2 pb-2"
         />
 
         <p>
@@ -36,7 +36,7 @@ const Movies = () => {
         <img
           src="/images/histogram.png"
           alt="Exploratory data analysis of movie dataset"
-          className="w-42 h-60 object-cover rounded float-left pr-2 pb-2"
+          className="w-full md:w-1/2 object-cover rounded float-left pr-2 pb-2"
         />
 
         <p>

@@ -34,7 +34,7 @@ const Klere = () => {
           <video
             src="/images/platform_demo.mov"
             controls
-            className="w-full md:w-auto md:h-60 object-cover rounded-md float-left mr-6 mb-6"
+            className="w-full md:w-auto md:h-60 object-cover rounded-md md:float-left mr-6 mb-6"
           />
 
           <p>
