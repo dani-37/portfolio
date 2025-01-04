@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <script>
-      // Get the current location
-      const origin = window.location.origin; // Correctly uses the site's base URL
-      const path = window.location.pathname + window.location.search; // Include query params if present
+      (function() {
+        // If the user is already being redirected to the root with a param, stop to avoid loops
+        if (window.location.search.includes('redirectFrom=404')) {
+          return;
+        }
 
-      // Redirect to the correct route within the React app
-      const redirectUrl = origin + path;
-      window.location.replace(redirectUrl);
+        // Capture the original path
+        const originalPath = window.location.pathname + window.location.search + window.location.hash;
+
+        // Redirect to /?redirectFrom=404&to=originalPath
+        const newUrl =
+          window.location.origin +
+          "/?redirectFrom=404&to=" +
+          encodeURIComponent(originalPath);
+
+        window.location.replace(newUrl);
+      })();
     </script>
   </head>
-  <body>
-    Redirecting...
-  </body>
+  <body>Redirecting...</body>
 </html>

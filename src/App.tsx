@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, NavLink, Link } from 'react-router-dom';
 import AnimatedRoutes from './components/Routes.tsx';
 import ThreeBackground from './components/Background.tsx';
 import { Menu, X } from 'lucide-react';
+import ReactGA from "react-ga4";
 
 import './index.css'; 
 
+ReactGA.initialize("G-8SZZJKC9XT");
 
 function App() {
 
@@ -13,6 +15,9 @@ function App() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
 
   return (
     <div>
@@ -70,7 +75,6 @@ function App() {
               </div>
             </main>
 
-
             <main className='hidden md:flex m-10 items-end justify-end relative md:w-[70%] min-h-[200px]'>
               <AnimatedRoutes />
             </main>
@@ -104,8 +108,8 @@ function App() {
               </ul>
             </div>
           )}
-    </div>
-    </div>
+        </div>
+      </div>
           
       <ThreeBackground />
     </div>
