@@ -45,14 +45,14 @@ const Contact = () => {
                         target="_blank" rel="noopener noreferrer"
                         className="flex items-center gap-4"
                         style={{ textDecoration: "underline", textDecorationColor: "white", textDecorationThickness: "3px", }}
-                        onClick={(e) => {
-                            e.preventDefault(); 
-                            window.open('/Daniel_Vegara_CV.pdf', '_blank', 'noopener,noreferrer');
-                            const link = document.createElement('a');
-                            link.href = '/Daniel_Vegara_CV.pdf';
-                            link.download = 'Daniel_Vegara_CV.pdf';
-                            link.click();
-                        }}
+                        // onClick={(e) => {
+                        //     e.preventDefault(); 
+                        //     window.open('/Daniel_Vegara_CV.pdf', '_blank', 'noopener,noreferrer');
+                        //     const link = document.createElement('a');
+                        //     link.href = '/Daniel_Vegara_CV.pdf';
+                        //     link.download = 'Daniel_Vegara_CV.pdf';
+                        //     link.click();
+                        // }}
                     >
                         <TextAnimator text="cv" />
                         <HiOutlineDocumentText className="pb-2" />

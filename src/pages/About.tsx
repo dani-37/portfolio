@@ -61,6 +61,7 @@ const About = () => {
         <Tooltip arrow title={<p className='font-mono'> CV </p>} >
           <a
             href="/Daniel_Vegara_CV.pdf"
+            target="_blank" rel="noopener noreferrer"
             className="text-gray-800 hover:text-black transition-all"
           >
             <HiOutlineDocumentText size={27} />
