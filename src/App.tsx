@@ -15,7 +15,7 @@ function App() {
 
 
   return (
-    <Router>
+    <div>
       <div className='content'>
         <div className='frame flex flex-col justify-between'>
 
@@ -108,7 +108,7 @@ function App() {
     </div>
           
       <ThreeBackground />
-    </Router>
+    </div>
   );
 }
 
