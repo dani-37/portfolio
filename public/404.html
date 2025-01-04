@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/" />
     <script>
-      const pathname = window.location.pathname;
-      window.location.replace(`/${pathname}`);
+      const newUrl = window.location.origin + window.location.pathname + window.location.search;
+      window.location.replace(newUrl);
     </script>
   </head>
   <body>
