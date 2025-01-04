@@ -44,7 +44,7 @@ const Klere = () => {
             here</a>.
           </p>
 
-          <div className="h-5"/>
+          <div className="h-8 md:h-5"/>
         </div>
     );
   

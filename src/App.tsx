@@ -23,12 +23,12 @@ function App() {
 
           {!isMenuOpen && 
             <div className='flex flex-col md:flex-row justify-between h-full md:h-full'>
-            <header className={`sticky top-0 flex md:min-h-screen cursor-default
-                  max-h-screen md:w-[40%] flex-col py-2 px-4 justify-between pl-10 md:pl-[100px] pb-6 md:pb-0 pt-10 md:pt-[100px]`}> 
+            <header className={`sticky top-0 flex md:min-h-screen cursor-default 
+                  max-h-screen md:w-[40%] flex-col py-2 px-4 justify-between pl-6 md:pl-[100px] pb-4 md:pb-0 pt-2 md:pt-[100px]`}> 
               
               <div className='flex flex-col gap-14'> 
-                <div className='text-[3.7rem] font-logo relative w-full flex justify-between'>
-                  <Link to={'/'}>
+                <div className='text-[3.7rem] font-logo relative w-full flex justify-between '>
+                  <Link to={'/'} className='scale-75 md:scale-100'>
                     <div className='rectangle'/>
                     <h1 className='mt-[-10px]'>
                       daniel
