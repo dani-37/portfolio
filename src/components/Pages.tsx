@@ -1,79 +1,71 @@
-import React, { useEffect, useRef } from 'react';
-import Tooltip from '@mui/material/Tooltip';
-import { Link } from 'react-router-dom';
-import { TextAnimator } from './Animation.tsx';
-import { GoArrowUpRight } from 'react-icons/go';
+import React from "react";
+import { GoArrowUpRight } from "react-icons/go";
+import ThreeBackground from "./Background.tsx";
+import { useNavigate } from "react-router-dom";
 
+const Page = ({
+  title,
+  description,
+  content,
+  link,
+  dates,
+}: {
+  title: string;
+  description: string;
+  content: React.ReactNode;
+  link?: string;
+  dates: string;
+}) => {
+  const navigate = useNavigate();
 
-const Page = ({ title, description, content, link, dates, page='work' }: 
-    { title: string; description: string; content: React.ReactNode; link?: string; dates: string, page?: string }) => {
-    const scrollableDivRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const preventBodyScroll = (e: Event) => e.preventDefault();
-    
-        const syncScroll = (e: WheelEvent) => {
-          const scrollableDiv = scrollableDivRef.current;
-          if (scrollableDiv) { scrollableDiv.scrollTop += e.deltaY; }
-        };
-    
-        // Disable native page scrolling
-        window.addEventListener('wheel', preventBodyScroll, { passive: false });
-    
-        // Add custom scrolling logic
-        window.addEventListener('wheel', syncScroll);
-    
-        return () => {
-          // Clean up event listeners
-          window.removeEventListener('wheel', preventBodyScroll);
-          window.removeEventListener('wheel', syncScroll);
-        };
-    }, []);
-  
-    return (
-      <div className="relative w-full md:max-h-[85vh] overflow-visible flex flex-col cursor-default">
-        <div className="flex gap-[12px] md:-ml-[4.45rem] items-center pt-5 md:pt-0">
-            <Tooltip title={<p className='font-mono'> Back </p>} placement="left" className='hidden md:block'>
-                <Link to={'/' + page} className="w-14 h-10 group flex items-center cursor-pointer">
-                    <p className="text-[2.7rem] w-16 ml-3 -mt-4 group-hover:ml-2 transition-all cursor-pointer pointer-events-none text-gray-800 opacity-70 group-hover:opacity-100" >
-                        {'<'}
-                    </p>
-                </Link>
-            </Tooltip>
-
-            <h2 className="font-mono text-5xl md:text-[3.5rem] flex flex-col md:flex-row justify-between w-full h-max md:items-end">
-                <TextAnimator text={title} />
-                <div className='w-full h-full flex md:justify-end min-h-full text-base pr-[20px] text-gray-800 mb-8'>
-                    {dates}
-                </div>
-            </h2>
+  return (
+    <div className="flex min-h-screen font-aptos ">
+      <aside className="fixed top-0 flex-none w-[28.57vw] h-screen hidden md:flex items-center overflow-hidden pointer-events-none">
+        <div
+          className="relative border-r-[1.5px] w-3/5 h-[75vh] border-yellow
+               drop-shadow-[0_0_2px_rgba(255,255,0,0.6)] py-[15vh]
+               flex flex-col justify-between items-end pr-4"
+        />
+        <div
+          onClick={() => navigate("/")}
+          className="pt-6 pb-[70vh] absolute top-[12vh] right-[12vw] pr-6 pl-8 text-4xl -ml-20 cursor-pointer pointer-events-auto opacity-70 hover:opacity-100 transition-all hover:text-green hover:pr-8">
+          {"<"}
         </div>
-      
-        <p className="md:text-xl font-mono text-gray-800 -mt-4 md:mt-0">
+      </aside>
+
+      <div className="w-full flex flex-col cursor-default md:pl-[28.57vw] py-[14.28vh] px-[5vw] md:pr-[14.28vw] text-yellow">
+        <h2 className="font-medium flex w-full text-5xl md:text-[3.5rem] justify-between items-center">
+          <p className="font-medium tracking-wider ">{title}</p>
+          <div className="flex md:justify-end text-base font-light">
+            {dates}
+          </div>
+        </h2>
+
+        <p className="md:text-xl font-aptos font-extralight">
           {description}
           {link && (
-            <Tooltip title={<p className='font-mono'> Go to site </p>} placement="right">
-              <a
-                href={link} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center ml-1 translate-y-1 text-white opacity-70 hover:opacity-100 hover:scale-110"
-              >
-                <GoArrowUpRight className="ml-1 -mb-4" />
-              </a>
-            </Tooltip>
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center ml-1 translate-y-1 text-green opacity-70 hover:opacity-100 hover:scale-110 transition-all">
+              <GoArrowUpRight className="ml-1 -mb-4" />
+            </a>
           )}
         </p>
-            
-        <div className="h-[1px] w-full bg-white mt-4" />
-    
+
+        <div className="h-[1px] w-full bg-green mt-4" />
+
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar fade-edge" ref={scrollableDivRef}>
-          <div className="text-gray-600 md:text-[1.1rem] font-aptos py-5">
+        <div className="flex-1">
+          <div className="md:text-[1.1rem] py-5 text-yellow font-light font-aptos">
             {content}
           </div>
         </div>
-
       </div>
-    );
-  };
+      <ThreeBackground />
+    </div>
+  );
+};
 
-export default Page
+export default Page;

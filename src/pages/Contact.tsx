@@ -1,71 +1,63 @@
-import React from 'react';
-import { TextAnimator } from '../components/Animation.tsx';
-import { Outlet, useLocation } from 'react-router-dom';
+import React from "react";
+import { TextAnimator } from "../components/Animation.tsx";
+import { FiArrowUpRight } from "react-icons/fi";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { HiOutlineMail, HiOutlineDocumentText } from 'react-icons/hi';
+import { HiOutlineMail, HiOutlineDocumentText } from "react-icons/hi";
 
+const ContactItem = ({
+  name,
+  icon,
+  link,
+}: {
+  name: string;
+  icon: any;
+  link: string;
+}) => {
+  return (
+    <div className="flex text-5xl md:text-6xl font-aptos cursor-pointer text-yellow group max-w-[430px] opacity-80 hover:opacity-100">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-5"
+        style={{
+          textDecoration: "underline",
+          textDecorationColor: "#00e04b",
+          textDecorationThickness: "3px",
+        }}>
+        <div className="group-hover:text-green drop-shadow-[0_0_4px_rgba(255,255,0,0.6)]">
+          {icon}
+        </div>
+        <div className="group-hover:text-green font-normal tracking-wider">
+          {name}
+        </div>
+      </a>
+    </div>
+  );
+};
 
 const Contact = () => {
-  const location = useLocation();
-  const isBaseRoute = location.pathname === '/contact'; 
-
   return (
-      <>
-      {isBaseRoute ? (
-        <div className='text-right w-full'>
-            <ul className="w-full flex flex-col gap-10 items-end">
-                <li className={`font-mono text-5xl cursor-pointer w-min hover:active flex items-center gap-4`} >
-                    <a href="https://linkedin.com/in/dvegarabalsa" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4"
-                    style={{ textDecoration: "underline", textDecorationColor: "white", textDecorationThickness: "3px", }}>
-                    <TextAnimator text="linkedin" />
-                    <FaLinkedin className='pb-2' />
-                    </a>
-                </li>
-
-                {/* <li className={`font-mono text-5xl cursor-pointer w-min hover:active flex items-center gap-4`} >
-                    <a href="https://github.com/dani-37" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4"
-                    style={{ textDecoration: "underline", textDecorationColor: "white", textDecorationThickness: "3px", }}>
-                    <TextAnimator text="github" />
-                    <FaGithub className='pb-2' />
-                    </a>
-                </li> */}
-
-                <li className={`font-mono text-5xl cursor-pointer w-min hover:active flex items-center gap-4`} >
-                    <a href="mailto:dani+work@vegarabalsa.com" className="flex items-center gap-4"
-                    style={{ textDecoration: "underline", textDecorationColor: "white", textDecorationThickness: "3px", }}
-                    >
-                    <TextAnimator text="email" />
-                    <HiOutlineMail className='pb-2' />
-                    </a>
-                </li>
-
-                <li className="font-mono text-5xl cursor-pointer w-min hover:active flex items-center gap-4" >
-                    <a
-                        href="/Daniel_Vegara_CV.pdf"
-                        target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-4"
-                        style={{ textDecoration: "underline", textDecorationColor: "white", textDecorationThickness: "3px", }}
-                        // onClick={(e) => {
-                        //     e.preventDefault(); 
-                        //     window.open('/Daniel_Vegara_CV.pdf', '_blank', 'noopener,noreferrer');
-                        //     const link = document.createElement('a');
-                        //     link.href = '/Daniel_Vegara_CV.pdf';
-                        //     link.download = 'Daniel_Vegara_CV.pdf';
-                        //     link.click();
-                        // }}
-                    >
-                        <TextAnimator text="cv" />
-                        <HiOutlineDocumentText className="pb-2" />
-                    </a>
-                </li>
-            </ul>
-        </div>
-      ) : (
-        <div className='mt-10 h-full w-full'>
-          <Outlet /> 
-        </div>
-      )}
-    </>
+    <div className="space-y-12">
+      <p className="md:hidden font-aptos text-5xl md:text-6xl  -mt-8 mb-16 font-medium tracking-wider text-green">
+        Contact
+      </p>
+      <ContactItem
+        name="LinkedIn"
+        icon={<FaLinkedin />}
+        link="https://linkedin.com/in/dvegarabalsa"
+      />
+      <ContactItem
+        name="Mail"
+        icon={<HiOutlineMail />}
+        link="mailto:dani+work@vegarabalsa.com"
+      />
+      <ContactItem
+        name="Resume"
+        icon={<HiOutlineDocumentText />}
+        link="/Daniel_Vegara_CV.pdf"
+      />
+    </div>
   );
 };
 
