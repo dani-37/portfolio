@@ -80,7 +80,7 @@ export default function TopoBackground() {
           const paths = peakPaths(peak.cx, peak.cy, peak.bands, peak.harmonics)
           const [minO, maxO] = peak.opacityRange
           return paths.map((d, bi) => {
-            const opacity = minO + (bi / (paths.length - 1)) * (maxO - minO)
+            const opacity = paths.length > 1 ? minO + (bi / (paths.length - 1)) * (maxO - minO) : minO
             return (
               <path
                 key={`${pi}-${bi}`}
