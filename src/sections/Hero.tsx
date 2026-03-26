@@ -3,7 +3,7 @@ export default function Hero() {
     <div className="absolute inset-0 p-10 md:p-12 flex flex-col justify-between">
       {/* Name wordmark */}
       <div>
-        <span className="block font-grotesk font-light text-[22px] tracking-[6px] uppercase text-[#888] mb-1">
+        <span className="block font-display italic font-medium text-[clamp(22px,3.5vw,30px)] leading-none tracking-[0.5px] text-[#999] mb-1">
           daniel
         </span>
         <span className="block font-display font-bold text-[clamp(40px,8vw,66px)] leading-none tracking-[-1.5px] text-ink">

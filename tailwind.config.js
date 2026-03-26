@@ -15,7 +15,7 @@ export default {
         ink: '#1a1a18',
       },
       fontFamily: {
-        display: ['Fraunces', 'serif'],
+        display: ['Lora', 'serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
         mono: ['Space Mono', 'monospace'],
       },
