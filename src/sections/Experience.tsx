@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-const ROLES = [
+export const ROLES = [
   {
     name: 'Klere',
     role: 'Analyst · sustainability consulting',
@@ -27,20 +25,22 @@ const ROLES = [
   },
 ]
 
-export default function Experience() {
-  const [expanded, setExpanded] = useState<string | null>(null)
+interface ExperienceProps {
+  onSelect: (name: string) => void
+}
 
+export default function Experience({ onSelect }: ExperienceProps) {
   return (
     <div className="absolute inset-0 p-12 md:p-14 flex flex-col justify-between">
       <p className="font-mono text-[8px] tracking-[3px] uppercase text-green-deep mb-2">
         Experience
       </p>
       <div className="flex flex-col flex-1 justify-evenly">
-        {ROLES.map(({ name, role, years, detail }) => (
+        {ROLES.map(({ name, role, years }) => (
           <div
             key={name}
             className="border-b border-[#ebe6dc] last:border-b-0 py-2 cursor-pointer group"
-            onClick={() => setExpanded(expanded === name ? null : name)}
+            onClick={() => onSelect(name)}
           >
             <div className="flex justify-between items-baseline">
               <div>
@@ -53,11 +53,6 @@ export default function Experience() {
                 {years}
               </span>
             </div>
-            {expanded === name && (
-              <p className="font-grotesk font-light text-[13px] text-[#666] mt-2 leading-relaxed">
-                {detail}
-              </p>
-            )}
           </div>
         ))}
       </div>

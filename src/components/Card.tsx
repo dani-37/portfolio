@@ -7,6 +7,7 @@ interface CardProps {
   cardTopVh: number
   cardHeightVh: number
   children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
+  overlay?: React.ReactNode
 }
 
 const NUM_SECTIONS = 3
@@ -17,6 +18,7 @@ export default function Card({
   cardTopVh,
   cardHeightVh,
   children,
+  overlay,
 }: CardProps) {
   const clips = [0, 1, 2].map(i => {
     const p = sectionProgress(scrollProgress, i, NUM_SECTIONS)
@@ -53,6 +55,11 @@ export default function Card({
           {children[i + 1]}
         </div>
       ))}
+      {overlay && (
+        <div className="absolute inset-0 z-50" style={{ background: 'rgba(253, 252, 249, 0.97)' }}>
+          {overlay}
+        </div>
+      )}
     </div>
   )
 }
