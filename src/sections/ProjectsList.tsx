@@ -1,22 +1,5 @@
 import { Link } from 'react-router-dom'
-
-// Temporary stub — will be replaced when Task 8 creates src/projects/index.ts
-export interface ProjectMeta {
-  slug: string
-  name: string
-  tag: string
-  description: string
-  featured: boolean
-}
-
-const PROJECT_REGISTRY: ProjectMeta[] = [
-  { slug: 'odi', name: 'ODI', tag: 'AI · full-stack', description: 'Open Data Interpreter — natural language queries over public datasets', featured: true },
-  { slug: 'footprints', name: 'Footprints', tag: 'GIS · Python', description: 'Biodiversity impact modelling from land use & supply chains', featured: false },
-  { slug: 'notoecd', name: 'notoecd', tag: 'Python pkg', description: 'Published pip package for OECD SDMX dataset discovery', featured: false },
-  { slug: 'tennis', name: 'Tennis', tag: 'Modelling', description: 'Bradley-Terry & ELO player rating systems', featured: false },
-  { slug: 'movies', name: 'Movies', tag: 'Graph theory', description: 'Graph-based recommender over MovieLens data', featured: false },
-  { slug: 'other', name: 'Chess · unReel · p5 · Budget', tag: 'Various', description: 'Smaller explorations across chess AI, iOS, generative art, and finance', featured: false },
-]
+import { PROJECT_REGISTRY } from '../projects'
 
 export default function ProjectsList() {
   return (
