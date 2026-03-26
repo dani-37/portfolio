@@ -6,11 +6,11 @@ interface ProjectsListProps {
 
 export default function ProjectsList({ onSelect }: ProjectsListProps) {
   return (
-    <div className="absolute inset-0 p-12 md:p-14 flex flex-col">
-      <p className="font-mono text-[8px] tracking-[3px] uppercase text-green-deep mb-4">
+    <div className="absolute inset-0 p-10 md:p-12 flex flex-col">
+      <p className="font-mono text-[8px] tracking-[3px] uppercase text-green-deep mb-3">
         Projects
       </p>
-      <div className="flex flex-col flex-1 justify-evenly overflow-hidden">
+      <div className="flex flex-col gap-[2px] overflow-hidden">
         {PROJECT_REGISTRY.map(({ slug, name, tag, description, featured }) => (
           <div
             key={slug}

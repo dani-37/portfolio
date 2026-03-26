@@ -1,9 +1,9 @@
 export default function Hero() {
   return (
-    <div className="absolute inset-0 p-12 md:p-14 flex flex-col justify-between">
+    <div className="absolute inset-0 p-10 md:p-12 flex flex-col justify-between">
       {/* Name wordmark */}
       <div>
-        <span className="block font-grotesk font-light text-[15px] tracking-[5px] uppercase text-[#888] mb-1">
+        <span className="block font-grotesk font-light text-[22px] tracking-[6px] uppercase text-[#888] mb-1">
           daniel
         </span>
         <span className="block font-display font-bold text-[clamp(40px,8vw,66px)] leading-none tracking-[-1.5px] text-ink">

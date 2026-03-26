@@ -1,4 +1,4 @@
-import { useState, useRef, Suspense } from 'react'
+import { useState, useRef, useEffect, Suspense } from 'react'
 import TopoBackground from '../components/TopoBackground'
 import Card from '../components/Card'
 import WipeLine from '../components/WipeLine'
@@ -22,6 +22,23 @@ export default function Home() {
   const { topVh, heightVh } = useCardRect(cardRef)
   const [detail, setDetail] = useState<DetailItem>(null)
 
+  // Lock page scroll while detail is open
+  useEffect(() => {
+    document.body.style.overflow = detail ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [detail])
+
+  function handleBack() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight
+    document.body.style.overflow = ''
+    if (detail?.type === 'experience') {
+      window.scrollTo({ top: scrollable * 0.2, behavior: 'instant' })
+    } else if (detail?.type === 'project') {
+      window.scrollTo({ top: scrollable * 0.55, behavior: 'instant' })
+    }
+    setDetail(null)
+  }
+
   const progresses: [number, number, number] = [
     sectionProgress(scrollProgress, 0, 3),
     sectionProgress(scrollProgress, 1, 3),
@@ -34,9 +51,9 @@ export default function Home() {
     const role = ROLES.find(r => r.name === detail.id)
     if (role) {
       overlay = (
-        <div className="absolute inset-0 overflow-y-auto p-12 md:p-14">
+        <div className="absolute inset-0 overflow-y-auto p-10 md:p-12">
           <button
-            onClick={() => setDetail(null)}
+            onClick={handleBack}
             className="font-mono text-[10px] tracking-[3px] uppercase text-green-deep hover:opacity-60 transition-opacity mb-8 block"
           >
             ← back
@@ -57,9 +74,9 @@ export default function Home() {
     if (project) {
       overlay = (
         <div className="absolute inset-0 overflow-y-auto">
-          <div className="px-12 pt-12 md:px-14 md:pt-14 pb-4">
+          <div className="px-10 pt-10 md:px-12 md:pt-12 pb-4">
             <button
-              onClick={() => setDetail(null)}
+              onClick={handleBack}
               className="font-mono text-[10px] tracking-[3px] uppercase text-green-deep hover:opacity-60 transition-opacity block"
             >
               ← back

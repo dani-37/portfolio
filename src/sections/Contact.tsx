@@ -1,6 +1,6 @@
 export default function Contact() {
   return (
-    <div className="absolute inset-0 p-12 md:p-14 flex flex-col justify-center gap-6">
+    <div className="absolute inset-0 p-10 md:p-12 flex flex-col justify-center gap-5">
       <p className="font-mono text-[8px] tracking-[3px] uppercase text-[#aaa]">Contact</p>
       <div>
         <h2 className="font-display font-bold text-[clamp(34px,5vw,52px)] tracking-[-1.5px] leading-none text-ink">

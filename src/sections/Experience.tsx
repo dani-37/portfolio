@@ -31,11 +31,11 @@ interface ExperienceProps {
 
 export default function Experience({ onSelect }: ExperienceProps) {
   return (
-    <div className="absolute inset-0 p-12 md:p-14 flex flex-col justify-between">
-      <p className="font-mono text-[8px] tracking-[3px] uppercase text-green-deep mb-2">
+    <div className="absolute inset-0 p-10 md:p-12 flex flex-col">
+      <p className="font-mono text-[8px] tracking-[3px] uppercase text-green-deep mb-4">
         Experience
       </p>
-      <div className="flex flex-col flex-1 justify-evenly">
+      <div className="flex flex-col gap-1">
         {ROLES.map(({ name, role, years }) => (
           <div
             key={name}

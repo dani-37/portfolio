@@ -15,7 +15,7 @@ export default {
         ink: '#1a1a18',
       },
       fontFamily: {
-        display: ['Cormorant Garamond', 'serif'],
+        display: ['Fraunces', 'serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
         mono: ['Space Mono', 'monospace'],
       },

@@ -31,7 +31,7 @@ export default function Card({
       className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 overflow-hidden shadow-2xl"
       style={{
         width: 'min(92vw, 920px)',
-        height: 'min(90vh, 580px)',
+        height: 'min(80vh, 460px)',
         background: 'rgba(253, 252, 249, 0.91)',
         backdropFilter: 'blur(6px)',
         WebkitBackdropFilter: 'blur(6px)',
@@ -48,7 +48,7 @@ export default function Card({
           className="absolute inset-0"
           style={{
             clipPath: `inset(${clips[i].toFixed(1)}% 0 0 0)`,
-            background: 'rgba(253, 252, 249, 0.97)',
+            background: 'rgb(253, 252, 249)',
             zIndex: i + 1,
           }}
         >
@@ -56,7 +56,7 @@ export default function Card({
         </div>
       ))}
       {overlay && (
-        <div className="absolute inset-0 z-50" style={{ background: 'rgba(253, 252, 249, 0.97)' }}>
+        <div className="absolute inset-0 z-50" style={{ background: 'rgb(253, 252, 249)' }}>
           {overlay}
         </div>
       )}
