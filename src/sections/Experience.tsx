@@ -44,17 +44,17 @@ export default function Experience() {
           >
             <div className="flex justify-between items-baseline">
               <div>
-                <span className="font-syne font-bold text-[20px] tracking-[-0.5px] text-ink group-hover:text-green-deep transition-colors">
+                <span className="font-display font-bold text-[26px] tracking-[-0.5px] text-ink group-hover:text-green-deep transition-colors">
                   {name}
                 </span>
-                <p className="font-grotesk font-light text-[10px] text-[#999] mt-[2px]">{role}</p>
+                <p className="font-grotesk font-light text-[12px] text-[#999] mt-[2px]">{role}</p>
               </div>
-              <span className="font-mono text-[8px] text-[#ccc] tracking-[1px] shrink-0 ml-4">
+              <span className="font-mono text-[9px] text-[#ccc] tracking-[1px] shrink-0 ml-4">
                 {years}
               </span>
             </div>
             {expanded === name && (
-              <p className="font-grotesk font-light text-[10px] text-[#666] mt-2 leading-relaxed">
+              <p className="font-grotesk font-light text-[13px] text-[#666] mt-2 leading-relaxed">
                 {detail}
               </p>
             )}

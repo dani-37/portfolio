@@ -30,11 +30,11 @@ export default function WipeLine({ sectionProgresses, sectionLabels }: WipeLineP
       {/* Section label — floats just above the line, left of card */}
       {isActive && (
         <div
-          className="fixed z-20 pointer-events-none font-mono text-[8px] tracking-[3px] uppercase"
+          className="fixed z-20 pointer-events-none font-mono text-[10px] tracking-[3px] uppercase"
           style={{
             top: `${topVh}vh`,
             left: '2vw',
-            transform: 'translateY(-50%)',
+            transform: 'translateY(6px)',
             color: '#1a6b5a',
             opacity: 0.7,
           }}

@@ -15,16 +15,16 @@ export default function ProjectsList() {
             className="flex items-baseline gap-4 py-[7px] border-b border-[#ebe6dc] last:border-b-0 group"
           >
             <span
-              className={`font-syne font-bold text-[16px] min-w-[100px] tracking-[-0.3px] transition-colors ${
+              className={`font-display font-bold text-[20px] min-w-[100px] tracking-[-0.3px] transition-colors ${
                 featured ? 'text-green-deep' : 'text-ink group-hover:text-green-deep'
               }`}
             >
               {name}
             </span>
-            <span className="font-mono text-[7px] tracking-[1.5px] uppercase text-green-deep min-w-[90px]">
+            <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-green-deep min-w-[90px]">
               {tag}
             </span>
-            <span className="font-grotesk font-light text-[10px] text-[#aaa] flex-1 hidden md:block">
+            <span className="font-grotesk font-light text-[12px] text-[#aaa] flex-1 hidden md:block">
               {description}
             </span>
           </Link>

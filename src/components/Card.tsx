@@ -28,8 +28,8 @@ export default function Card({
       ref={cardRef}
       className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 overflow-hidden shadow-2xl"
       style={{
-        width: 'min(92vw, 820px)',
-        height: 'min(82vh, 400px)',
+        width: 'min(92vw, 920px)',
+        height: 'min(90vh, 580px)',
         background: 'rgba(253, 252, 249, 0.91)',
         backdropFilter: 'blur(6px)',
         WebkitBackdropFilter: 'blur(6px)',
