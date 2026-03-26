@@ -4,10 +4,10 @@ export default function Hero() {
       {/* Name wordmark */}
       <div>
         <span className="block font-display italic font-medium text-[clamp(26px,4vw,36px)] leading-none tracking-[0.5px] text-[#999]">
-          <span className="text-[80%]">D</span>ANIEL
+          <span className="text-[80%]">D</span>aniel
         </span>
         <span className="block font-display font-bold text-[clamp(40px,8vw,66px)] leading-[1.05] tracking-[-1.5px] text-ink">
-          <span className="text-[80%]">V</span>EGARA<span className="text-green-deep">.</span>
+          <span className="text-[80%]">V</span>egara<span className="text-green-deep">.</span>
         </span>
       </div>
 
