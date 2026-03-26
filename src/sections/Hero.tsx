@@ -1,3 +1,5 @@
+import MorphingSphere from '../components/MorphingSphere'
+
 export default function Hero() {
   return (
     <div className="absolute inset-0 p-10 md:p-12 flex flex-col justify-between">
@@ -24,6 +26,12 @@ export default function Hero() {
           </div>
         ))}
       </div>
+
+      {/* Morphing sphere — decorative right-side element */}
+      <MorphingSphere
+        size={360}
+        className="absolute right-[-50px] top-1/2 -translate-y-1/2 pointer-events-none"
+      />
 
       {/* Footer: coordinates + links */}
       <div>
