@@ -1,4 +1,4 @@
-import { ComponentType, lazy } from 'react'
+import { type ComponentType, lazy } from 'react'
 
 export interface ProjectMeta {
   slug: string

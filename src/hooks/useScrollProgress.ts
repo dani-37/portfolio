@@ -62,7 +62,7 @@ export function useScrollProgress(): number {
 }
 
 /** React hook: returns card top and height in vh, updates on resize */
-export function useCardRect(cardRef: React.RefObject<HTMLElement>): {
+export function useCardRect(cardRef: React.RefObject<HTMLElement | null>): {
   topVh: number
   heightVh: number
 } {

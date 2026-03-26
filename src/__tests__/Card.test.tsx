@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import Card from '../components/Card'
 
-const mockRef = { current: null } as React.RefObject<HTMLDivElement>
+const mockRef = { current: null } as React.RefObject<HTMLDivElement | null>
 
 it('renders all four section slots', () => {
   const { getByTestId } = render(

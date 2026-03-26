@@ -3,7 +3,7 @@ import { sectionProgress, cardClipPercent } from '../hooks/useScrollProgress'
 
 interface CardProps {
   scrollProgress: number
-  cardRef: React.RefObject<HTMLDivElement>
+  cardRef: React.RefObject<HTMLDivElement | null>
   cardTopVh: number
   cardHeightVh: number
   children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
