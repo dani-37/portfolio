@@ -36,10 +36,11 @@ export function useScrollLayout(opts: {
   wipeLineRef: React.RefObject<HTMLDivElement | null>
   wipeLabelRef: React.RefObject<HTMLDivElement | null>
   hintRef: React.RefObject<HTMLDivElement | null>
+  navRef: React.RefObject<HTMLDivElement | null>
   labels: string[]
   enabled: boolean
 }) {
-  const { cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, labels, enabled } = opts
+  const { cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, navRef, labels, enabled } = opts
   // Cache card rect — only changes on resize, not scroll
   const cardRect = useRef({ topVh: 12, heightVh: 55 })
 
@@ -59,6 +60,7 @@ export function useScrollLayout(opts: {
     window.addEventListener('resize', updateRect)
 
     let rafId = 0
+    let lastNavSection = 0
     function onScroll() {
       if (!rafId) rafId = requestAnimationFrame(tick)
     }
@@ -108,6 +110,45 @@ export function useScrollLayout(opts: {
       if (hint) {
         hint.style.opacity = scrollP > 0.04 ? '0' : '0.7'
       }
+
+      // Nav indicator — switches when a section covers >60% of card,
+      // otherwise holds the previous selection
+      const nav = navRef.current
+      if (nav) {
+        const numSections = numClips + 1
+        const progresses: number[] = []
+        for (let i = 0; i < numClips; i++) {
+          progresses.push(sectionProgress(scrollP, i, numClips))
+        }
+
+        for (let i = 0; i < numSections; i++) {
+          let vis: number
+          if (i === 0) {
+            vis = 1 - (progresses[0] ?? 0)
+          } else if (i < numSections - 1) {
+            const prev = progresses[i - 1] ?? 0
+            const curr = progresses[i] ?? 0
+            vis = Math.min(prev, 1) - curr
+          } else {
+            vis = progresses[i - 1] ?? 0
+          }
+          vis = Math.max(0, Math.min(1, vis))
+          if (vis >= 0.6) lastNavSection = i
+        }
+
+        const groups = nav.children
+        for (let i = 0; i < groups.length; i++) {
+          const bar = (groups[i] as HTMLElement).lastElementChild as HTMLElement
+          if (!bar) continue
+          if (i === lastNavSection) {
+            bar.style.width = '32px'
+            bar.style.background = '#1a6b5a'
+          } else {
+            bar.style.width = '20px'
+            bar.style.background = '#9aaba3'
+          }
+        }
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -117,5 +158,5 @@ export function useScrollLayout(opts: {
       window.removeEventListener('resize', updateRect)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, labels, enabled])
+  }, [cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, navRef, labels, enabled])
 }

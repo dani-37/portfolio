@@ -71,7 +71,7 @@ export default function TopoBackground() {
       <g
         id="contours"
         ref={groupRef}
-        filter="url(#topo-flow)"
+        filter={typeof window !== 'undefined' && window.innerWidth >= 768 ? 'url(#topo-flow)' : undefined}
         stroke="#2d5a52"
         fill="none"
         strokeWidth={0.9}

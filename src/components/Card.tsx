@@ -3,7 +3,7 @@ import React, { useCallback } from 'react'
 interface CardProps {
   cardRef: React.RefObject<HTMLDivElement | null>
   clipRefs: React.RefObject<(HTMLDivElement | null)[]>
-  children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
+  children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
   overlay?: React.ReactNode
 }
 
@@ -29,7 +29,7 @@ export default function Card({ cardRef, clipRefs, children, overlay }: CardProps
       }}
     >
       <div className="absolute inset-0">{children[0]}</div>
-      {[0, 1, 2, 3].map(i => (
+      {[0, 1, 2].map(i => (
         <div
           key={i}
           ref={setClipRef(i)}

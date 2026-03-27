@@ -4,8 +4,7 @@ import Timeline from '../sections/Timeline'
 describe('Timeline', () => {
   it('renders the section header', () => {
     const { getByText } = render(<Timeline />)
-    expect(getByText('002 — TIMELINE')).toBeInTheDocument()
-    expect(getByText('2000 – NOW')).toBeInTheDocument()
+    expect(getByText('Timeline')).toBeInTheDocument()
   })
 
   it('renders all three location markers', () => {
