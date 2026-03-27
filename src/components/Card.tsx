@@ -1,29 +1,19 @@
-import React from 'react'
-import { sectionProgress, cardClipPercent } from '../hooks/useScrollProgress'
+import React, { useCallback } from 'react'
 
 interface CardProps {
-  scrollProgress: number
   cardRef: React.RefObject<HTMLDivElement | null>
-  cardTopVh: number
-  cardHeightVh: number
-  children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
+  clipRefs: React.RefObject<(HTMLDivElement | null)[]>
+  children: [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode]
   overlay?: React.ReactNode
 }
 
-const NUM_SECTIONS = 3
-
-export default function Card({
-  scrollProgress,
-  cardRef,
-  cardTopVh,
-  cardHeightVh,
-  children,
-  overlay,
-}: CardProps) {
-  const clips = [0, 1, 2].map(i => {
-    const p = sectionProgress(scrollProgress, i, NUM_SECTIONS)
-    return cardClipPercent(p, cardTopVh, cardHeightVh)
-  })
+export default function Card({ cardRef, clipRefs, children, overlay }: CardProps) {
+  const setClipRef = useCallback(
+    (i: number) => (el: HTMLDivElement | null) => {
+      if (clipRefs.current) clipRefs.current[i] = el
+    },
+    [clipRefs],
+  )
 
   return (
     <div
@@ -38,16 +28,14 @@ export default function Card({
         borderLeft: '2px solid #1a6b5a',
       }}
     >
-      {/* Section 0: Hero — always visible base */}
       <div className="absolute inset-0">{children[0]}</div>
-
-      {/* Sections 1–3: wipe in from bottom */}
-      {[0, 1, 2].map(i => (
+      {[0, 1, 2, 3].map(i => (
         <div
           key={i}
+          ref={setClipRef(i)}
           className="absolute inset-0"
           style={{
-            clipPath: `inset(${clips[i].toFixed(1)}% 0 0 0)`,
+            clipPath: 'inset(100% 0 0 0)',
             background: 'rgb(253, 252, 249)',
             zIndex: i + 1,
           }}

@@ -1,11 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-/**
- * Returns how far through its phase a section is (0–1).
- * scrollP: overall scroll progress 0–1
- * sectionIndex: 0-based index of the section (0 = first wipe)
- * numSections: total number of wipe sections (3)
- */
 export function sectionProgress(
   scrollP: number,
   sectionIndex: number,
@@ -13,24 +7,13 @@ export function sectionProgress(
 ): number {
   const phase = 1 / numSections
   const start = sectionIndex * phase
-  const end = (sectionIndex + 1) * phase
-  return Math.max(0, Math.min(1, (scrollP - start) / (end - start)))
+  return Math.max(0, Math.min(1, (scrollP - start) * numSections))
 }
 
-/**
- * Converts section progress to the viewport Y position of the wipe line (0–100 vh).
- * 0 = top of viewport (wipe complete), 100 = bottom (wipe not started).
- */
 export function lineTopVh(progress: number): number {
   return 100 - progress * 100
 }
 
-/**
- * Converts a line position to the clip-path percentage for the card section.
- * cardTopVh: top of card in vh units
- * cardHeightVh: height of card in vh units
- * Returns 0–100: 100 = fully hidden, 0 = fully revealed.
- */
 export function cardClipPercent(
   progress: number,
   cardTopVh: number,
@@ -43,44 +26,96 @@ export function cardClipPercent(
   return Math.max(0, 100 - clamped * 100)
 }
 
-/** React hook: returns overall scroll progress 0–1 */
-export function useScrollProgress(): number {
-  const [progress, setProgress] = useState(0)
+/**
+ * Drives all scroll animations via direct DOM writes — zero React re-renders.
+ * Card clip-paths, wipe line, and scroll hint are all updated through refs.
+ */
+export function useScrollLayout(opts: {
+  cardRef: React.RefObject<HTMLElement | null>
+  clipRefs: React.RefObject<(HTMLDivElement | null)[]>
+  wipeLineRef: React.RefObject<HTMLDivElement | null>
+  wipeLabelRef: React.RefObject<HTMLDivElement | null>
+  hintRef: React.RefObject<HTMLDivElement | null>
+  labels: string[]
+  enabled: boolean
+}) {
+  const { cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, labels, enabled } = opts
+  // Cache card rect — only changes on resize, not scroll
+  const cardRect = useRef({ topVh: 12, heightVh: 55 })
 
   useEffect(() => {
-    function update() {
-      const scrollable =
-        document.documentElement.scrollHeight - window.innerHeight
-      setProgress(scrollable > 0 ? window.scrollY / scrollable : 0)
-    }
-    window.addEventListener('scroll', update, { passive: true })
-    update()
-    return () => window.removeEventListener('scroll', update)
-  }, [])
+    if (!enabled || typeof window === 'undefined' || window.innerWidth < 768) return
 
-  return progress
-}
-
-/** React hook: returns card top and height in vh, updates on resize */
-export function useCardRect(cardRef: React.RefObject<HTMLElement | null>): {
-  topVh: number
-  heightVh: number
-} {
-  const [rect, setRect] = useState({ topVh: 12, heightVh: 55 })
-
-  useEffect(() => {
-    function update() {
-      if (!cardRef.current) return
-      const r = cardRef.current.getBoundingClientRect()
-      setRect({
+    function updateRect() {
+      const el = cardRef.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      cardRect.current = {
         topVh: (r.top / window.innerHeight) * 100,
         heightVh: (r.height / window.innerHeight) * 100,
-      })
+      }
     }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [cardRef])
+    updateRect()
+    window.addEventListener('resize', updateRect)
 
-  return rect
+    let rafId = 0
+    function onScroll() {
+      if (!rafId) rafId = requestAnimationFrame(tick)
+    }
+
+    function tick() {
+      rafId = 0
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      const scrollP = scrollable > 0 ? window.scrollY / scrollable : 0
+      const { topVh, heightVh } = cardRect.current
+      const clips = clipRefs.current
+      const numClips = clips ? clips.length : 0
+
+      // Update clip-paths
+      if (clips) {
+        for (let i = 0; i < numClips; i++) {
+          const el = clips[i]
+          if (!el) continue
+          const p = sectionProgress(scrollP, i, numClips)
+          const clip = cardClipPercent(p, topVh, heightVh)
+          el.style.clipPath = `inset(${clip.toFixed(1)}% 0 0 0)`
+        }
+      }
+
+      // Wipe line + label
+      let activeIdx = -1, activeP = 0
+      for (let i = 0; i < numClips; i++) {
+        const p = sectionProgress(scrollP, i, numClips)
+        if (p > 0 && p < 1) { activeIdx = i; activeP = p; break }
+      }
+      const wipeTop = lineTopVh(activeP)
+      const isActive = activeIdx !== -1
+
+      const line = wipeLineRef.current
+      if (line) {
+        line.style.top = `${wipeTop}vh`
+        line.style.opacity = isActive ? '0.4' : '0'
+      }
+      const label = wipeLabelRef.current
+      if (label) {
+        label.style.top = `${wipeTop}vh`
+        label.style.opacity = isActive ? '0.7' : '0'
+        label.textContent = isActive ? labels[activeIdx] : ''
+      }
+
+      // Scroll hint
+      const hint = hintRef.current
+      if (hint) {
+        hint.style.opacity = scrollP > 0.04 ? '0' : '0.7'
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    tick() // initial paint
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', updateRect)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }, [cardRef, clipRefs, wipeLineRef, wipeLabelRef, hintRef, labels, enabled])
 }
