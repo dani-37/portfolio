@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 
-const LAT = 18;
-const LON = 24;
+const LAT = 37;
+const LON = 0;
 const STEPS = 30;
 const A_MAX = 0.35;
 const PERIOD = 16; // seconds per full eversion cycle
@@ -97,7 +97,8 @@ export default function InOutSphere({
     const ctx = canvas.getContext("2d")!;
     if (!ctx) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = size * dpr;
     canvas.height = size * dpr;
     ctx.scale(dpr, dpr);
@@ -140,7 +141,7 @@ export default function InOutSphere({
     }
 
     function draw() {
-      animId = requestAnimationFrame(draw);
+      if (!prefersReduced) animId = requestAnimationFrame(draw);
       if (!visible) return;
       const t = (performance.now() - start) / 1000;
       ctx.clearRect(0, 0, size, size);
@@ -151,7 +152,7 @@ export default function InOutSphere({
       const rotZ = 0.22;
 
       ctx.lineWidth = 0.7;
-      ctx.strokeStyle = "#1a6b5a";
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--color-green-deep").trim() || "#1a6b5a";
 
       // Latitude rings
       for (let i = 0; i <= LAT; i++) {
@@ -202,6 +203,8 @@ export default function InOutSphere({
   return (
     <canvas
       ref={canvasRef}
+      role="img"
+      aria-label="Animated sphere eversion"
       style={{ width: size, height: size }}
       className={className}
     />

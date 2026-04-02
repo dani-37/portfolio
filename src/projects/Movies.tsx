@@ -1,7 +1,7 @@
 export default function Movies({ stack }: { stack?: string[] }) {
   return (
-    <article className="max-w-2xl mx-auto px-6 pt-8 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-syne font-bold text-[40px] tracking-[-1.5px] leading-none mb-4">
+    <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
+      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Movie Network
       </h1>
       {stack && (
@@ -9,14 +9,14 @@ export default function Movies({ stack }: { stack?: string[] }) {
           {stack.map((tech) => (
             <span
               key={tech}
-              className="font-mono text-[8px] tracking-[1px] uppercase text-[#999] border border-[#ddd] rounded-sm px-2 py-[2px]"
+              className="font-mono text-label tracking-wide uppercase text-gray-muted border border-gray-faint rounded-sm px-2 py-[2px]"
             >
               {tech}
             </span>
           ))}
         </div>
       )}
-      <div className="space-y-5 text-[15px] leading-relaxed text-[#444]">
+      <div className="space-y-5 text-body leading-relaxed text-gray-strong">
         <img
           src="/images/graph.png"
           alt="Network graph of movies"
@@ -69,21 +69,21 @@ export default function Movies({ stack }: { stack?: string[] }) {
 
         <div className="clear-both" />
 
-        <p className="font-medium italic text-[#666]">The Romcom Lover</p>
+        <p className="font-medium italic text-gray">The Romcom Lover</p>
         <img
           src="/images/romcom.png"
           alt="Romcom movie recommendation results"
           className="w-full object-cover rounded-lg"
         />
 
-        <p className="font-medium italic text-[#666]">The Tarantino Fanatic</p>
+        <p className="font-medium italic text-gray">The Tarantino Fanatic</p>
         <img
           src="/images/tarantino.png"
           alt="Tarantino movie recommendation results"
           className="w-full object-cover rounded-lg"
         />
 
-        <p className="font-medium italic text-[#666]">Family Friendly Fun</p>
+        <p className="font-medium italic text-gray">Family Friendly Fun</p>
         <img
           src="/images/family.png"
           alt="Family friendly movie recommendation results"

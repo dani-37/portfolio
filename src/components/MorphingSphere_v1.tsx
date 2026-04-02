@@ -1,10 +1,9 @@
 import { useRef, useEffect } from "react";
-import fires from "../data/fires.json";
 
 const LAT = 37;
 const LON = 0;
-const STEPS = 60;
-const SMOOTH_PASSES = 20;
+const STEPS = 100;
+const SMOOTH_PASSES = 16;
 
 const _vr = { x: 0, y: 0, z: 0 };
 
@@ -37,24 +36,67 @@ function viewRotate(
   return _vr;
 }
 
-// --- Fire-driven hole sources (pre-computed by scripts/fetch_fires.py) ---
+// --- Hole sources ---
 
-const RAMP_IN = 5;
-const ACTIVE_WINDOW = 12;
+const RAMP_IN = 4; // seconds per source to ramp up
+const STAGGER = 3; // seconds between each source starting
 
-const FIRE_SOURCES = fires as {
-  x: number;
-  y: number;
-  z: number;
-  sigma: number;
-  appearAt: number;
-  a: number;
-  b: number;
-  c: number;
-}[];
-
-const LAST_APPEAR = Math.max(...FIRE_SOURCES.map((s) => s.appearAt));
-const CYCLE_DURATION = LAST_APPEAR + ACTIVE_WINDOW + 5;
+const SOURCE_DEFS = [
+  // Large irregular — upper right, elongated shape
+  {
+    phi0: 0.85,
+    phiA: 0.3,
+    phiW: 0.015,
+    phiP: 0.0,
+    th0: 0.2,
+    thSpd: 0.02,
+    thA: 0.8,
+    thW: 0.025,
+    thP: 0.0,
+    period: 37,
+    off: 0.0,
+    sigma: 0.6,
+    a: 0.5,
+    b: 2.5,
+    c: 3.1,
+  },
+  // Wide organic — lower left, very irregular boundary
+  {
+    phi0: 2.1,
+    phiA: 0.3,
+    phiW: 0.015,
+    phiP: 1.5,
+    th0: 4.5,
+    thSpd: 0.02,
+    thA: 0.6,
+    thW: 0.03,
+    thP: 3.2,
+    period: 50,
+    off: 3.14,
+    sigma: 0.7,
+    a: 0.2,
+    b: 3.0,
+    c: 0.5,
+  },
+  // Tall stretched — equatorial, strong 2nd harmonic
+  {
+    phi0: 1.4,
+    phiA: 0.4,
+    phiW: 0.02,
+    phiP: 4.0,
+    th0: 2.5,
+    thSpd: 0.015,
+    thA: 0.5,
+    thW: 0.025,
+    thP: 1.0,
+    period: 45,
+    off: 1.57,
+    sigma: 0.65,
+    a: 3.2,
+    b: 0.3,
+    c: 1.8,
+  },
+] as const;
 
 type SourceData = {
   x: number;
@@ -72,42 +114,40 @@ type SourceData = {
 
 function getSources(t: number): SourceData[] {
   const out: SourceData[] = [];
-  const cycleT = t % CYCLE_DURATION;
 
-  for (let idx = 0; idx < FIRE_SOURCES.length; idx++) {
-    const s = FIRE_SOURCES[idx];
+  for (let idx = 0; idx < SOURCE_DEFS.length; idx++) {
+    const s = SOURCE_DEFS[idx];
+    // Each source ramps in at its own staggered time
+    const sourceStart = idx * STAGGER;
+    const ramp = Math.min(1, Math.max(0, (t - sourceStart) / RAMP_IN));
+    const rampNorm = ramp * ramp * (3 - 2 * ramp); // smoothstep
 
-    // How far into this source's window are we?
-    const age = cycleT - s.appearAt;
-    const wrappedAge = age < -CYCLE_DURATION / 2 ? age + CYCLE_DURATION : age;
-    if (wrappedAge < 0 || wrappedAge > ACTIVE_WINDOW) continue;
-
-    // Smoothstep ramp in
-    const rampIn = Math.min(1, wrappedAge / RAMP_IN);
-    const rampInSmooth = rampIn * rampIn * (3 - 2 * rampIn);
-
-    // Smoothstep ramp out
-    const timeLeft = ACTIVE_WINDOW - wrappedAge;
-    const rampOut = Math.min(1, timeLeft / RAMP_IN);
-    const rampOutSmooth = rampOut * rampOut * (3 - 2 * rampOut);
-
-    const strength = rampInSmooth * rampOutSmooth;
+    const phase = Math.sin((t / s.period) * Math.PI * 2 + s.off);
+    const raw = Math.max(0, 0.3 + 0.7 * phase); // brief dip, mostly active
+    const strength = raw * rampNorm;
     if (strength < 1e-6) continue;
 
-    // Breathing sigma like v1
+    const phi = Math.max(
+      0.2,
+      Math.min(Math.PI - 0.2, s.phi0 + s.phiA * Math.sin(s.phiW * t + s.phiP)),
+    );
+    const theta = s.th0 + t * s.thSpd + s.thA * Math.sin(s.thW * t + s.thP);
+    const sx = Math.sin(phi) * Math.cos(theta);
+    const sy = Math.cos(phi);
+    const sz = Math.sin(phi) * Math.sin(theta);
     const sigma =
       s.sigma *
-      (1 + 0.3 * Math.sin(t * 0.15 + s.a) + 0.15 * Math.sin(t * 0.23 + s.b));
+      (1 + 0.3 * Math.sin(t * 0.15 + s.off) + 0.15 * Math.sin(t * 0.23 + s.a));
 
-    // Fast-evolving envelope for organic hole shapes
+    // Fast-evolving envelope phases — shapes morph constantly
     const p2 = s.a + t * 0.18;
     const p3 = -(s.b + t * 0.13);
     const p5 = s.c + t * 0.09;
 
     out.push({
-      x: s.x,
-      y: s.y,
-      z: s.z,
+      x: sx,
+      y: sy,
+      z: sz,
       strength,
       sigma,
       e2s: Math.sin(p2),
@@ -258,18 +298,12 @@ function applyPush(
   return _pp;
 }
 
-const INTRO_DURATION = 1.8; // seconds to reveal all parallels
-
 export default function MorphingSphere({
   size,
   className,
-  intro,
-  onIntroComplete,
 }: {
   size: number;
   className?: string;
-  intro?: boolean;
-  onIntroComplete?: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -279,9 +313,6 @@ export default function MorphingSphere({
     const ctx = canvas.getContext("2d")!;
     if (!ctx) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = size * dpr;
     canvas.height = size * dpr;
@@ -293,8 +324,6 @@ export default function MorphingSphere({
     const start = performance.now();
     let animId: number;
     let visible = true;
-    let introDone = !intro;
-    let introFired = false;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -578,7 +607,7 @@ export default function MorphingSphere({
     }
 
     function draw() {
-      if (!prefersReduced) animId = requestAnimationFrame(draw);
+      animId = requestAnimationFrame(draw);
       if (!visible) return;
       const t = (performance.now() - start) / 1000;
       ctx.clearRect(0, 0, size, size);
@@ -589,26 +618,7 @@ export default function MorphingSphere({
       const sources = getSources(t);
 
       ctx.lineWidth = 0.7;
-      ctx.strokeStyle =
-        getComputedStyle(document.documentElement)
-          .getPropertyValue("--color-green-deep")
-          .trim() || "#1a6b5a";
-
-      // Intro: progressively reveal parallels from pole to pole
-      let visibleLat = LAT;
-      if (!introDone) {
-        const introProgress = Math.min(1, t / INTRO_DURATION);
-        // Ease-in-out: slow start, accelerate through middle, slow finish
-        const eased = introProgress < 0.5
-          ? 4 * introProgress * introProgress * introProgress
-          : 1 - Math.pow(-2 * introProgress + 2, 3) / 2;
-        visibleLat = Math.floor(eased * (LAT + 1)) - 1;
-        if (introProgress >= 1 && !introFired) {
-          introDone = true;
-          introFired = true;
-          onIntroComplete?.();
-        }
-      }
+      ctx.strokeStyle = "#1a6b5a";
 
       // Phase 1: Displace all latitude rings
       for (let i = 0; i <= LAT; i++) {
@@ -696,7 +706,7 @@ export default function MorphingSphere({
       }
 
       // Phase 3: Temporal smooth + project + draw each ring
-      for (let i = 0; i <= Math.min(LAT, visibleLat); i++) {
+      for (let i = 0; i <= LAT; i++) {
         const sph = latSphere[i];
         const prev = latPrev[i];
         if (!firstFrame) {
@@ -855,8 +865,6 @@ export default function MorphingSphere({
   return (
     <canvas
       ref={canvasRef}
-      role="img"
-      aria-label="Animated wireframe sphere shaped by live global wildfire data"
       style={{ width: size, height: size }}
       className={className}
     />

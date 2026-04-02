@@ -13,9 +13,8 @@ function formatDate(iso: string): string {
 const SENTENCES = [
   "This sphere is shaped by real wildfire data.",
   "Every day, satellite hotspots from the past week are fetched from NASA's VIIRS sensor.",
-  "Each fire becomes a hole in the surface of the sphere.",
+  "Each fire becomes a hole in the surface of the sphere, matching the fire's longitude and latitude.",
   "Denser fire regions carve larger holes.",
-  `The data you are seeing was fetched today, ${formatDate(firesMeta.fetchedAt)}.`,
   `Over the last week, ${firesMeta.fireCount.toLocaleString()} wildfires were recorded.`,
 ];
 
@@ -24,8 +23,11 @@ const HOLD_TIME = 2200;
 
 type Phase = "typing" | "holding" | "idle";
 
-export default function SphereInfo() {
-  const [open, setOpen] = useState(false);
+export default function SphereInfo({
+  autoStart,
+  onDone,
+}: { autoStart?: boolean; onDone?: () => void } = {}) {
+  const [open, setOpen] = useState(!!autoStart);
   const [sentenceIdx, setSentenceIdx] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
@@ -35,6 +37,15 @@ export default function SphereInfo() {
     setCharIndex(0);
     setPhase("idle");
   }, []);
+
+  useEffect(() => {
+    if (autoStart) {
+      reset();
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [autoStart, reset]);
 
   useEffect(() => {
     if (!open) {
@@ -49,6 +60,7 @@ export default function SphereInfo() {
 
     if (sentenceIdx >= SENTENCES.length) {
       setPhase("idle");
+      onDone?.();
       return;
     }
 
@@ -71,18 +83,19 @@ export default function SphereInfo() {
     }
   }, [open, sentenceIdx, charIndex, phase, reset]);
 
-  if (open) {
-    const done = sentenceIdx >= SENTENCES.length;
-    return (
-      <div className="h-5 font-grotesk font-light text-[11px] leading-relaxed text-gray max-w-[320px] text-center">
-        {done ? (
+  const done = open && sentenceIdx >= SENTENCES.length;
+
+  return (
+    <div className="h-[42px] flex items-center justify-center font-grotesk font-light text-[13px] leading-relaxed text-gray max-w-[350px] text-center">
+      {open ? (
+        done ? (
           <span className="flex items-center justify-center gap-2">
             <a
               href="https://www.earthdata.nasa.gov/learn/find-data/near-real-time/firms/viirs-i-band-375-m-active-fire-data"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-deep hover:underline cursor-pointer">
-              sources
+              source
             </a>
             <span className="text-gray-muted">·</span>
             <button
@@ -96,39 +109,28 @@ export default function SphereInfo() {
             </button>
           </span>
         ) : (
-          <span className="relative">
+          <span>
             {SENTENCES[sentenceIdx].slice(0, charIndex)}
             <span
-              className={`absolute ${phase === "holding" ? "animate-blink ml-1" : ""}`}>
+              className={`inline-block w-0 overflow-visible ${phase === "holding" ? "animate-blink" : ""}`}>
               |
             </span>
           </span>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <button
-      onClick={() => setOpen(true)}
-      className="group h-5 text-gray font-grotesk font-light text-[11px] leading-none opacity-60 hover:opacity-100 hover:text-green-deep transition-all cursor-pointer"
-      aria-label="Learn about this sphere's live data">
-      shaped by live data
-      <svg
-        width="7"
-        height="7"
-        viewBox="0 0 7 7"
-        fill="none"
-        className="inline ml-0.5 -translate-y-px transition-transform duration-200 group-hover:translate-x-0.5"
-        aria-hidden="true">
-        <path
-          d="M2 1L5 3.5L2 6"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </button>
+        )
+      ) : (
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-gray-muted opacity-80">
+            shaped by live wildfire data
+          </span>
+          <span className="btn-brutalist-wrap btn-brutalist-sm transition-opacity duration-300">
+            <button
+              onClick={() => setOpen(true)}
+              className="btn-brutalist block font-grotesk font-light text-[12px] text-green-deep border border-green-deep px-2.5 py-0.5 bg-card cursor-pointer">
+              learn how
+            </button>
+          </span>
+        </div>
+      )}
+    </div>
   );
 }

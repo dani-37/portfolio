@@ -1,15 +1,279 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   scroll-behavior: auto;
+
+  --color-bg: #d0d9ce;
+  --color-card: #f7f6f1;
+  --color-card-glass: rgba(247, 246, 241, 0.91);
+  --color-card-glass-heavy: rgba(247, 246, 241, 0.95);
+  --color-ink: #2c2c28;
+  --color-green-deep: #3d6b4e;
+  --color-green-mid: #7a9e80;
+  --color-green-topo: #4a6b50;
+  --color-green-muted: #8ea690;
+  --color-gray-strong: #555;
+  --color-gray: #747470;
+  --color-gray-mid: #8a8a82;
+  --color-gray-muted: #7a7a72;
+  --color-gray-soft: #9a9a92;
+  --color-gray-faint: #ccccc4;
+  --color-gray-warm: #d4d2c8;
+  --color-gray-warm-light: #e4e2d8;
+}
+
+html.dark {
+  --color-bg: #0f1916;
+  --color-card: #1a211e;
+  --color-card-glass: rgba(26, 33, 30, 0.91);
+  --color-card-glass-heavy: rgba(26, 33, 30, 0.95);
+  --color-ink: #c8c8c4;
+  --color-green-deep: #6b9a78;
+  --color-green-mid: #6aab90;
+  --color-green-topo: #3d7a6a;
+  --color-green-muted: #5a7a6f;
+  --color-gray-strong: #bbb;
+  --color-gray: #999;
+  --color-gray-mid: #8a8a8a;
+  --color-gray-muted: #888;
+  --color-gray-soft: #8a8a8a;
+  --color-gray-faint: #333;
+  --color-gray-warm: #2a2f2c;
+  --color-gray-warm-light: #232826;
+}
+
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-hero-in {
+  opacity: 0;
+  animation-name: hero-in;
+  animation-duration: 400ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+
+.animate-card-build {
+  clip-path: inset(50% 100% 50% 0);
+  animation: desktop-card-build 1100ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes desktop-card-build {
+  0% {
+    clip-path: inset(50% 100% 50% 0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    clip-path: inset(0 99.5% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-sphere-in {
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 400ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1000ms step-end infinite;
+}
+
+/* Reusable brutalist hover: button shifts up-right, green slab peeks out behind */
+/* Reusable brutalist hover: button shifts up-right, green slab peeks out behind.
+   The wrapper uses a ::before pad to extend the hover/click zone over the slab area
+   so the cursor stays a pointer and clicks work everywhere. */
+.btn-brutalist-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Invisible hover-zone extension covering the slab offset area */
+.btn-brutalist-wrap::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  bottom: -3px;
+  left: -3px;
+}
+
+.btn-brutalist-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  @apply bg-green-deep;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-brutalist-wrap:hover::after {
+  opacity: 1;
+  transform: translate(-3px, 3px);
+}
+
+.btn-brutalist {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-brutalist-wrap:hover .btn-brutalist {
+  transform: translate(3px, -3px);
+  @apply border-green-deep text-green-deep bg-card;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0s;
+}
+
+/* Inverted variant: green bg + white text → white bg + green text on hover */
+.btn-brutalist-wrap:hover .btn-brutalist-inverted {
+  @apply bg-card text-green-deep;
+}
+
+/* Small variant */
+.btn-brutalist-sm::before {
+  bottom: -1.5px;
+  left: -1.5px;
+}
+
+.btn-brutalist-sm:hover::after {
+  transform: translate(-1.5px, 1.5px);
+}
+
+.btn-brutalist-sm:hover .btn-brutalist {
+  transform: translate(1.5px, -1.5px);
+}
+
+/* Focus-visible ring for keyboard navigation */
+.btn-brutalist:focus-visible {
+  outline: 2px solid var(--color-green-deep);
+  outline-offset: 2px;
+}
+
+/* Focusable list items (experience/project rows) */
+.focusable-row:focus-visible {
+  outline: 2px solid var(--color-green-deep);
+  outline-offset: -2px;
+}
+
+/* SVG timeline chevron */
+.timeline-chevron {
+  opacity: 0.3;
+  transform: translateX(-2px);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+.timeline-svg-entry:hover .timeline-chevron {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
+/* SVG timeline keyboard focus */
+.timeline-svg-entry:focus-visible {
+  outline: none;
+}
+.timeline-svg-entry:focus-visible .timeline-svg-hit {
+  stroke: var(--color-green-deep);
+  stroke-width: 1.5;
+  rx: 3;
+  fill: rgba(61, 107, 78, 0.08);
+}
+
+/* Mobile card border — grows outward from center */
+/* Mobile card build — border + card wipe right */
+.card-intro-reveal {
+  /* position: relative is on the card element itself */
+}
+.card-intro-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--color-card);
+  border: 1px solid var(--color-green-deep);
+  z-index: -1;
+  animation: card-build 1100ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes card-build {
+  0% {
+    clip-path: inset(50% 100% 50% 0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    clip-path: inset(0 99.5% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Scroll chevron pulse */
+@keyframes chevron-pulse {
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
+  50% { opacity: 0.8; transform: translateY(4px); }
+}
+
+.animate-chevron-pulse {
+  animation: chevron-pulse 2.4s ease-in-out infinite;
+}
+
+/* Brutalist tooltip — follows cursor via JS (data-tip-x / data-tip-y) */
+.tooltip-brutalist {
+  position: fixed;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 60;
+  transition: opacity 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
-  background-color: #e6f0ed;
-  color: #1a1a18;
+  @apply bg-bg text-ink;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 300;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

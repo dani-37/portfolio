@@ -1,7 +1,7 @@
 export default function ODI({ stack }: { stack?: string[] }) {
   return (
-    <article className="max-w-2xl mx-auto px-6 pt-8 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-syne font-bold text-[40px] tracking-[-1.5px] leading-none mb-4">
+    <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
+      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Open Data Interpreter
       </h1>
       {stack && (
@@ -9,14 +9,14 @@ export default function ODI({ stack }: { stack?: string[] }) {
           {stack.map((tech) => (
             <span
               key={tech}
-              className="font-mono text-[8px] tracking-[1px] uppercase text-[#999] border border-[#ddd] rounded-sm px-2 py-[2px]"
+              className="font-mono text-label tracking-wide uppercase text-gray-muted border border-gray-faint rounded-sm px-2 py-[2px]"
             >
               {tech}
             </span>
           ))}
         </div>
       )}
-      <div className="space-y-5 text-[15px] leading-relaxed text-[#444]">
+      <div className="space-y-5 text-body leading-relaxed text-gray-strong">
         <p>
           ODI is a tool for working with public datasets through a combination of
           a high-quality dataset search experience and a chatbot/agent interface.
