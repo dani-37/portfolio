@@ -4,7 +4,6 @@ import TopoBackground from "../components/TopoBackground";
 import Card from "../components/Card";
 import WipeLine from "../components/WipeLine";
 import Hero from "../sections/Hero";
-import Experience from "../sections/Experience";
 import { EXPERIENCE_REGISTRY } from "../experiences";
 import ProjectsList from "../sections/ProjectsList";
 import Contact from "../sections/Contact";

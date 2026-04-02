@@ -23,10 +23,10 @@ function MobileTimeline({ onSelect, introReady = true }: { onSelect?: (name: str
     }
   }, [introReady, visible, animating]);
 
-  const cls = (delay: number) =>
+  const cls = (_delay: number) =>
     animating ? "animate-hero-in" : visible ? "" : "opacity-0";
-  const sty = (delay: number): React.CSSProperties | undefined =>
-    animating ? { animationDelay: `${delay}ms` } : undefined;
+  const sty = (_delay: number): React.CSSProperties | undefined =>
+    animating ? { animationDelay: `${_delay}ms` } : undefined;
 
   return (
     <div className="p-8 md:p-14 pb-10 md:pb-10">

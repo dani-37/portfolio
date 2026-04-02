@@ -1,14 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import firesMeta from "../data/fires_meta.json";
 
-function formatDate(iso: string): string {
-  const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 const SENTENCES = [
   "This sphere is shaped by real wildfire data.",
