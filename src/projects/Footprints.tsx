@@ -1,9 +1,9 @@
 export default function Footprints({ stack }: { stack?: string[] }) {
   return (
     <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
+      <h2 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Nature Footprints
-      </h1>
+      </h2>
       {stack && (
         <div className="flex flex-wrap gap-2 mb-8">
           {stack.map((tech) => (
@@ -25,8 +25,11 @@ export default function Footprints({ stack }: { stack?: string[] }) {
         </p>
 
         <img
-          src="/images/bd_map.png"
+          src="/images/bd_map.webp"
           alt="Biodiversity density map of the UK"
+          loading="lazy"
+          width={1817}
+          height={2305}
           className="w-full md:w-1/3 object-cover rounded-lg md:float-right md:ml-4 mb-2"
         />
 
@@ -54,15 +57,20 @@ export default function Footprints({ stack }: { stack?: string[] }) {
         </p>
 
         <img
-          src="/images/bd_dash.png"
+          src="/images/bd_dash.webp"
           alt="Biodiversity footprint dashboard"
+          loading="lazy"
+          width={2816}
+          height={1502}
           className="w-full md:w-2/5 object-cover rounded-lg md:float-left md:mr-4 my-2"
         />
 
         <p>
-          The last part was conveying this data effectively. I developed an online
-          dashboard combining carbon and nature footprint measurements into one
-          interface. Read more about it{" "}
+          In total, the tool measured the biodiversity impact of over{" "}
+          <strong className="font-medium">£2 billion</strong> in economic
+          activity. The last part was conveying this data effectively. I
+          developed an online dashboard combining carbon and nature footprint
+          measurements into one interface. Read more about it{" "}
           <a
             href="https://www.klere.uk/nature-impact-metric"
             target="_blank"

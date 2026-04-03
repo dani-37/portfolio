@@ -1,9 +1,9 @@
 export default function Uncertainty({ stack }: { stack?: string[] }) {
   return (
     <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
+      <h2 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Forest Growth Uncertainty
-      </h1>
+      </h2>
       {stack && (
         <div className="flex flex-wrap gap-2 mb-8">
           {stack.map((tech) => (
@@ -34,8 +34,11 @@ export default function Uncertainty({ stack }: { stack?: string[] }) {
         </p>
 
         <img
-          src="/images/uncertainty_fig.png"
+          src="/images/uncertainty_fig.webp"
           alt="Scenario analysis showing uncertainty decomposition under increasing temperature"
+          loading="lazy"
+          width={1374}
+          height={776}
           className="img-full w-full rounded-lg my-2"
         />
 

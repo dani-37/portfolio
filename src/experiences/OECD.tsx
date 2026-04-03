@@ -22,8 +22,11 @@ export default function OECD() {
         score for regions across OECD countries.
       </p>
       <img
-        src="/images/oecd_regatt.png"
+        src="/images/oecd_regatt.webp"
         alt="OECD Regional Attractiveness visualisation"
+        loading="lazy"
+        width={1292}
+        height={988}
         className="img-full w-full md:w-1/2 rounded-lg my-2 md:float-right md:ml-4"
       />
       <p>
@@ -31,8 +34,9 @@ export default function OECD() {
         Guatemala, Latvia, Greece, and Italy, producing datasets, charts, and
         analysis for their reports and policy briefs. For Latvia, I built and
         handed over a large Python codebase that calculates regional values at
-        both regional and municipal level. It was the first time the programme could offer this
-        level of granularity and technical output.
+        both regional and municipal level — still in use today. It was the first
+        time the programme could offer this level of granularity and technical
+        output.
       </p>
       <p>
         I now work with the Rural team on projects covering forestry, rural

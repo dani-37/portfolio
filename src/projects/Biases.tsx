@@ -1,9 +1,9 @@
 export default function Biases({ stack }: { stack?: string[] }) {
   return (
     <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
+      <h2 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Quantifying Gender Bias in LLMs
-      </h1>
+      </h2>
       {stack && (
         <div className="flex flex-wrap gap-2 mb-8">
           {stack.map((tech) => (
@@ -42,8 +42,11 @@ export default function Biases({ stack }: { stack?: string[] }) {
         </p>
 
         <img
-          src="/images/llm_bias_results.png"
+          src="/images/llm_bias_results.webp"
           alt="Gender bias scores across semantic clusters for DeepSeek-R1, Llama-3.3-70B, and Mistral-Nemo"
+          loading="lazy"
+          width={1650}
+          height={1290}
           className="img-full w-full rounded-lg my-2"
         />
 

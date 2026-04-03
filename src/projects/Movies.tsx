@@ -1,9 +1,9 @@
 export default function Movies({ stack }: { stack?: string[] }) {
   return (
     <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
+      <h2 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Movie Network
-      </h1>
+      </h2>
       {stack && (
         <div className="flex flex-wrap gap-2 mb-8">
           {stack.map((tech) => (
@@ -17,8 +17,11 @@ export default function Movies({ stack }: { stack?: string[] }) {
       )}
       <div className="space-y-5 text-body leading-relaxed text-gray-strong">
         <img
-          src="/images/graph.png"
+          src="/images/graph.webp"
           alt="Network graph of movies"
+          loading="lazy"
+          width={888}
+          height={656}
           className="w-full md:w-1/2 object-cover rounded-lg md:float-right md:ml-4 mb-2 dark:invert-0 invert"
         />
 
@@ -55,8 +58,9 @@ export default function Movies({ stack }: { stack?: string[] }) {
             Brazil
           </a>
           {": "}
-          an absurd humour, distopyian future, wonky tale that fits right in
-          with my movie tastes.
+          an absurd humour, dystopian future, wonky tale that fits right in
+          with my movie tastes. I still use this whenever I'm picking a film
+          with friends.
         </p>
 
         <p>

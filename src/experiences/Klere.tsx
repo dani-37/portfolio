@@ -2,8 +2,11 @@ export default function Klere() {
   return (
     <>
       <img
-        src="/images/bd_map.png"
+        src="/images/bd_map.webp"
         alt="Biodiversity density map of the UK"
+        loading="lazy"
+        width={1817}
+        height={2305}
         className="w-full md:w-1/3 object-cover rounded-lg md:float-right md:ml-4 mb-4"
       />
       <p>
@@ -13,7 +16,7 @@ export default function Klere() {
       <p>
         I used GIS and Python to analyse UK habitat data, creating biodiversity
         density maps of the UK. We used these maps to analyse the biodiversity
-        opportunity cost of a company's direct land use.Using EXIOBASE, an
+        opportunity cost of a company's direct land use. Using EXIOBASE, an
         international input-output table with environmental data, I calculated
         land use embedded in supply chains. Combining data on direct and
         embedded land use impacts gave us a quantum for the biodiversity

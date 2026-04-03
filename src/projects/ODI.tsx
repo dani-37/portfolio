@@ -1,9 +1,9 @@
 export default function ODI({ stack }: { stack?: string[] }) {
   return (
     <article className="max-w-2xl mx-auto px-6 pt-10 pb-16 font-grotesk font-light text-ink">
-      <h1 className="font-display font-bold text-title tracking-tight leading-none mb-4">
+      <h2 className="font-display font-bold text-title tracking-tight leading-none mb-4">
         Open Data Interpreter
-      </h1>
+      </h2>
       {stack && (
         <div className="flex flex-wrap gap-2 mb-8">
           {stack.map((tech) => (
@@ -30,15 +30,21 @@ export default function ODI({ stack }: { stack?: string[] }) {
         </p>
 
         <img
-          src="/images/odi_example.png"
+          src="/images/odi_example.webp"
           alt="ODI interface showing a data query and response"
+          loading="lazy"
+          width={2540}
+          height={1694}
           className="img-full w-full rounded-lg my-2"
         />
 
         <p>
           Currently the tool indexes over 50,000 datasets from more than 30
           sources, including international organisations and national
-          statistical offices. Over 40 users within the OECD use it internally.
+          statistical offices. Over 40 users across 6 teams within the OECD use
+          it internally, more than half of them daily — replacing hours of
+          manual searching across national statistical offices and data portals.
+          I've presented it to leadership and teams totalling over 300 people.
         </p>
       </div>
     </article>

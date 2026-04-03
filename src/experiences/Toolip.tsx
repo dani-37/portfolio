@@ -2,8 +2,11 @@ export default function Toolip() {
   return (
     <>
       <img
-        src="/images/toolip.png"
+        src="/images/toolip.webp"
         alt="Toolip team"
+        loading="lazy"
+        width={698}
+        height={823}
         className="w-full md:w-2/5 object-cover rounded-lg md:float-right md:ml-4 mb-4"
       />
       <p>
