@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Suspense } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 import Home from './pages/Home'
 import ProjectPage from './pages/ProjectPage'
 import NotFound from './pages/NotFound'
@@ -7,6 +8,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 
 export default function App() {
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <a
         href="#main-content"
@@ -33,5 +35,6 @@ export default function App() {
         </Routes>
       </ErrorBoundary>
     </BrowserRouter>
+    </HelmetProvider>
   )
 }

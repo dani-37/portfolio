@@ -1,33 +1,38 @@
-import { Suspense, useEffect } from 'react'
+import { Suspense } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { PROJECT_REGISTRY } from '../projects'
 import TopoBackground from '../components/TopoBackground'
 import ThemeToggle from '../components/ThemeToggle'
+
+const BASE_URL = 'https://daniel.vegarabalsa.com'
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>()
   const project = PROJECT_REGISTRY.find(p => p.slug === slug)
 
-  useEffect(() => {
-    const prevTitle = document.title
-    const metaDesc = document.querySelector('meta[name="description"]')
-    const prevDesc = metaDesc?.getAttribute('content') ?? ''
-
-    if (project) {
-      document.title = `${project.name} — ${project.tag} | Daniel Vegara`
-      if (metaDesc) metaDesc.setAttribute('content', project.description)
-    } else {
-      document.title = 'Project Not Found | Daniel Vegara'
-    }
-
-    return () => {
-      document.title = prevTitle
-      if (metaDesc) metaDesc.setAttribute('content', prevDesc)
-    }
-  }, [project])
+  const title = project
+    ? `${project.name} — ${project.tag} | Daniel Vegara`
+    : 'Project Not Found | Daniel Vegara'
+  const description = project?.description ?? ''
+  const url = `${BASE_URL}/projects/${slug}`
+  const ogImage = `${BASE_URL}/og/${slug}.png`
 
   return (
     <main className="min-h-screen bg-bg">
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+      </Helmet>
       <ThemeToggle />
       <TopoBackground />
 
@@ -50,7 +55,7 @@ export default function ProjectPage() {
         >
           {project ? (
             <>
-            <h2 className="sr-only">{project.name}</h2>
+            <h1 className="sr-only">{project.name}</h1>
             <Suspense fallback={
               <div className="p-16 font-mono text-label text-gray-muted tracking-wide">
                 Loading...
