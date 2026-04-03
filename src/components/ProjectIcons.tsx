@@ -37,12 +37,13 @@ function Footprints() {
   );
 }
 
-/** Bell curve with dashed confidence bounds — statistical uncertainty */
+/** Trend line with dashed confidence bounds — uncertainty */
 function Uncertainty() {
   return (
     <Icon>
-      <path d="M2 19C5 19 8 5 12 5s7 14 10 14" />
-      <path d="M5 19C7 19 9 9 12 9s5 10 7 10" strokeDasharray="2.5 2.5" />
+      <path d="M3 17C7 15 13 9 21 7" />
+      <path d="M3 13C7 11 13 5 21 3" strokeDasharray="2.5 2.5" />
+      <path d="M3 21C7 19 13 13 21 11" strokeDasharray="2.5 2.5" />
     </Icon>
   );
 }
@@ -61,15 +62,13 @@ function Movies() {
   );
 }
 
-/** Two people linked by a line — volunteer coordination */
-function Toolip() {
+/** Slashed equal sign — inequality / bias */
+function Biases() {
   return (
     <Icon>
-      <circle cx="7" cy="7" r="3" />
-      <circle cx="17" cy="7" r="3" />
-      <path d="M10 7h4" />
-      <path d="M4 21v-2a4 4 0 014-4h1" />
-      <path d="M20 21v-2a4 4 0 00-4-4h-1" />
+      <line x1="5" y1="9" x2="19" y2="9" />
+      <line x1="5" y1="15" x2="19" y2="15" />
+      <line x1="18" y1="4" x2="6" y2="20" />
     </Icon>
   );
 }
@@ -78,6 +77,6 @@ export const PROJECT_ICONS: Record<string, React.FC> = {
   odi: ODI,
   footprints: Footprints,
   uncertainty: Uncertainty,
-  toolip: Toolip,
+  biases: Biases,
   movies: Movies,
 };
