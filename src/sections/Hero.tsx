@@ -80,27 +80,6 @@ export default function Hero({
         </h1>
       )}
 
-      {/* Structured data for SEO */}
-      {!mobile && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Daniel Vegara",
-              jobTitle: "Data Scientist",
-              worksFor: { "@type": "Organization", name: "OECD" },
-              url: "https://daniel.vegarabalsa.com",
-              sameAs: [
-                "https://linkedin.com/in/dvegarabalsa",
-                "https://github.com/dani-37",
-              ],
-            }),
-          }}
-        />
-      )}
-
       {mobile ? (
         <div>
           <p

@@ -24,6 +24,8 @@ export default function SphereInfo({
   const [charIndex, setCharIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
 
+  const [finished, setFinished] = useState(false);
+
   const reset = useCallback(() => {
     setSentenceIdx(0);
     setCharIndex(0);
@@ -32,12 +34,15 @@ export default function SphereInfo({
 
   useEffect(() => {
     if (autoStart) {
+      setFinished(false);
       reset();
       setOpen(true);
-    } else {
+    } else if (!finished) {
       setOpen(false);
     }
-  }, [autoStart, reset]);
+    // When finished, keep open=true so the done UI stays visible
+    // while the parent fades us out
+  }, [autoStart, reset, finished]);
 
   useEffect(() => {
     if (!open) {
@@ -52,6 +57,7 @@ export default function SphereInfo({
 
     if (sentenceIdx >= SENTENCES.length) {
       setPhase("idle");
+      setFinished(true);
       onDone?.();
       return;
     }

@@ -111,7 +111,7 @@ function MobileTimeline({ onSelect, introReady = true }: { onSelect?: (name: str
           type="experience"
           name="Klere"
           detail="Biodiversity footprints"
-          years="2023–25"
+          years="2023–26"
           onSelect={() => onSelect?.("Klere")}
         />
 
@@ -677,7 +677,7 @@ export default function Timeline({ onSelect, mobile, introReady }: TimelineProps
               fontSize="10"
               fill="var(--color-gray-soft)"
               fontFamily="'Space Mono', monospace">
-              2023–25
+              2023–26
             </text>
           </a>
 

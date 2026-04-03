@@ -405,7 +405,7 @@ export default function Home() {
             left: "calc(50% - min(92vw, 1058px) / 2)",
             width: "min(92vw, 1058px)",
           }}>
-          <span className="font-mono font-light text-caption tracking-wide text-green-mid">
+          <span className="font-mono font-light text-caption tracking-wide text-green-mid [text-shadow:0_0_8px_var(--color-card),0_0_16px_var(--color-card)]">
             <span className="group-hover:hidden">scroll to see more</span>
             <span className="hidden group-hover:inline">don't click — just scroll!</span>
           </span>

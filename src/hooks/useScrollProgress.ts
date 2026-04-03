@@ -54,6 +54,15 @@ export function useScrollLayout(opts: {
   const cardRect = useRef({ topVh: 12, heightVh: 55 });
   const hintHidden = useRef(false);
 
+  // Hide scroll hint immediately if the page loads already scrolled past the hero
+  useEffect(() => {
+    const hint = scrollHintRef?.current;
+    if (hint && window.scrollY > 0) {
+      hint.style.display = "none";
+      hintHidden.current = true;
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (!enabled || typeof window === "undefined" || window.innerWidth < 1024)
       return;

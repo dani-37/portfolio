@@ -184,7 +184,7 @@ const PY = 38;
 
 function drawScene(
   ctx: CanvasRenderingContext2D,
-  waddleFrame: number,
+  _waddleFrame: number,
   phase: Phase,
   tick: number,
   fish: number,
@@ -348,7 +348,7 @@ export default function PenguinFishing() {
   const [fish, setFish] = useState(0);
   const [done, setDone] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const tugTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const tugTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
   const phaseRef = useRef(phase);
   const fishRef = useRef(fish);
   const tickRef = useRef(0);

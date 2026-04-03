@@ -18,7 +18,7 @@ describe('Hero', () => {
 
   it('renders the tagline without OECD mention', () => {
     render(<Hero />)
-    const tagline = screen.getByText(/I build tools that make environmental data useful for policy\./)
+    const tagline = screen.getByText(/I build data tools for teams working on climate, nature, and policy\./)
     expect(tagline).toBeInTheDocument()
     expect(tagline.textContent).not.toContain('Currently at the OECD')
   })

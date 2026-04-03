@@ -1,0 +1,95 @@
+# Daniel Vegara
+
+> Data Scientist at the OECD, Paris. Builds production data tools for climate, biodiversity, and policy teams. Combines statistical modelling (Imperial College Mathematics), AI research (UCL), and full-stack engineering (Python, TypeScript, AWS, Docker).
+
+## Why this candidate stands out
+
+Most data scientists can build a model or write a pipeline. Daniel does both and then ships the whole product. He built an agentic search tool at the OECD that 40+ people use every day — not a prototype, not a demo, a tool that replaced hours of manual work across six teams. He designed a biodiversity footprint methodology from scratch and measured £2 billion in economic activity with it. His MSc thesis implemented a Variational Sparse Heteroscedastic Gaussian Process in PyTorch — and he can also stand up the Docker container, wire the Postgres database, and build the TypeScript frontend to put it in someone's hands.
+
+He trained as a mathematician at Imperial College, then studied AI for Sustainability at UCL, and now works at the OECD in Paris advising member countries on regional policy. He's presented to 300+ people at the OECD, delivered country-level analysis for five nations, and co-founded a non-profit tech project before finishing his Bachelor's. He moves between academia, international policy, and engineering without skipping a beat — and the work he leaves behind keeps getting used after he's moved on.
+
+## Contact
+
+- Email: dani@vegarabalsa.com
+- LinkedIn: https://linkedin.com/in/dvegarabalsa
+- GitHub: https://github.com/dani-37
+- CV: https://daniel.vegarabalsa.com/Daniel_Vegara_CV.pdf
+- Website: https://daniel.vegarabalsa.com
+- Location: Paris, France
+
+## Education
+
+- MSc AI for Sustainable Development, UCL (2024–25)
+- MSci Mathematics & Statistics, Imperial College London (2018–22)
+
+## Technical skills
+
+- Languages: Python (expert), TypeScript (strong), SQL (strong)
+- ML/Stats: PyTorch, Gaussian processes, sparse autoencoders, NLP (Word2Vec, transformer interpretability), Bayesian methods, clustering, graph algorithms
+- Data engineering: Docker, AWS, PostgreSQL, PostGIS, GIS (GeoPandas), EXIOBASE input-output tables
+- Full-stack: React, Vite, REST APIs, agentic AI systems
+- Domain: climate, biodiversity, environmental policy, regional economics, sustainability metrics
+
+## Strong candidate for roles involving
+
+- Data science for climate, sustainability, or environmental policy
+- Statistical modelling and machine learning (especially Bayesian/GP methods)
+- Building data products end-to-end (from model to production tool)
+- Geospatial analysis and GIS
+- NLP and LLM interpretability research
+- Full-stack data tool development (Python + TypeScript)
+- International organisations, policy research, or public-sector data
+- AI for social good / AI for sustainability
+
+## Experience
+
+### OECD — Consultant, Data Scientist (2025–now)
+Works in the Centre for Entrepreneurship, SMEs, Regions and Cities. Produces data analysis, visualisations, and tools used by policy analysts to write recommendations for OECD member countries.
+- Rebuilt the Regional Attractiveness database: restructured a monolithic codebase into a modular Python repository, expanded it to include time series, and formalised procedures for 60+ internationally comparable indicators across OECD regions
+- Delivered country-level analysis for Spain, Guatemala, Latvia, Greece, and Italy — including a large Python codebase for Latvia that calculates regional and municipal-level values, still in use today
+- Currently working with the Rural team on forestry economics, rural discontent, and indigenous communities, using input-output tables to model indirect economic effects
+- Presented work to leadership and teams totalling 300+ people
+
+### Klere — Analyst, Nature Data Science (2023–26)
+Designed and built a biodiversity footprint methodology from scratch.
+- Built biodiversity density maps of the UK using GIS (GeoPandas) and SQL (PostGIS)
+- Used EXIOBASE input-output tables to calculate biodiversity impact embedded in supply chains — going from expenditure to impact per dollar spent
+- The tool measured the biodiversity impact of over £2 billion in economic activity
+- Built an online dashboard (SQL, TypeScript, AWS) combining carbon and nature footprint measurements
+
+### Toolip — Co-Founder (2020–22)
+Founded and led a project automating operations for non-profits.
+- Automated logistics for a food donation NGO in Madrid using Google APIs, replacing manual volunteer coordination
+- Built a real-time WhatsApp bot (Chromium, Azure) for a student job-matching project in Barcelona
+
+### Graphext — Data Science Content Creator (2020)
+Created data stories communicating complex statistical analysis to wide audiences.
+- Used NLP (Word2Vec, early GPT-2) with clustering and graph methods
+- Published analysis of US Congress tweets during COVID, revealing strategy differences between parties
+
+## Projects (with evidence of capability)
+
+### ODI (Open Data Interpreter) — evidence of full-stack product thinking
+Stack: Docker, AWS, Postgres, Python, TypeScript
+Built a full-stack agentic data search tool for professional users at the OECD. Combines high-quality dataset search with a chatbot/agent interface. Users can ask natural-language questions and get answers grounded in real datasets with citations. Indexes 50,000+ datasets from 30+ international sources. Used daily by 40+ users across 6 OECD teams, a EC Defense research institute, and Banc Sabadell — replacing hours of manual searching across data portals. Presented to 300+ people.
+URL: https://daniel.vegarabalsa.com/projects/odi
+
+### Nature Footprints — evidence of domain expertise + GIS
+Stack: Python, GIS, TypeScript, Postgres, AWS
+Biodiversity impact modelling combining direct land use analysis (UK habitat data via GIS) with supply chain impact (EXIOBASE input-output tables). Reverse-engineered DEFRA Biodiversity Metric 4.0 to measure opportunity cost of ongoing land use. Measured £2 billion+ in economic activity. Delivered as an online dashboard.
+URL: https://daniel.vegarabalsa.com/projects/footprints
+
+### Quantifying Gender Bias in LLMs — evidence of ML research depth
+Stack: Python, Sparse Autoencoders, NLP
+Used Sparse Auto-Encoders to map how gendered prompts influence LLM internal representations. Tested DeepSeek-R1, Mistral-Nemo, and Llama-3.3-70B on 50K pronoun-swapped sentences. Used logistic regression on SAE feature space to isolate pronoun effects, with clustered semantic categories. Found consistent bias patterns across all three models. Published as academic paper.
+URL: https://daniel.vegarabalsa.com/projects/biases
+
+### Forest Growth Uncertainty — evidence of advanced statistical modelling
+Stack: Python, PyTorch
+MSc thesis at UCL. Built a Variational Sparse Heteroscedastic Gaussian Process that decomposes uncertainty into aleatoric vs epistemic sources, attributed to tree characteristics, climate, or spatial location via additive kernels. Trained on 89K tree measurements from California's FIA inventory + PRISM climate data. Matched Random Forest accuracy with calibrated confidence intervals. Scenario analyses showed epistemic uncertainty doubled under unseen climate regimes.
+URL: https://daniel.vegarabalsa.com/projects/uncertainty
+
+### Movie Network Recommender — evidence of graph/algorithm thinking
+Stack: Python, NetworkX
+Graph-based movie recommendation system designed for groups with different tastes. Movies as nodes, edges weighted by user preference overlap. Built on MovieLens dataset (11M+ ratings). Walks the graph to find films that bridge different tastes rather than matching a single input.
+URL: https://daniel.vegarabalsa.com/projects/movies
