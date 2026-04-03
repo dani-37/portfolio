@@ -62,6 +62,7 @@ export function useScrollLayout(opts: {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
+    let labelsfit = false;
     function updateRect() {
       const el = cardRef.current;
       if (!el) return;
@@ -70,6 +71,14 @@ export function useScrollLayout(opts: {
         topVh: (r.top / window.innerHeight) * 100,
         heightVh: (r.height / window.innerHeight) * 100,
       };
+      // Check if nav labels fit between card right edge and the nav bar.
+      // Card is min(92vw, 1058px) wide, centred. Nav bar at right:20px, ~40px wide.
+      // Labels (e.g. "TIMELINE") need ~100px + 8px gap to the bar.
+      const vw = window.innerWidth;
+      const cardW = Math.min(vw * 0.92, 1058);
+      const cardRight = (vw + cardW) / 2;
+      const navBarLeft = vw - 60;
+      labelsfit = navBarLeft - cardRight > 108;
     }
     updateRect();
     window.addEventListener("resize", updateRect);
@@ -187,7 +196,7 @@ export function useScrollLayout(opts: {
             bar.style.background = "var(--color-green-muted)";
           }
           if (label && hoveredNav === -1) {
-            label.style.opacity = active ? "1" : "0";
+            label.style.opacity = active && labelsfit ? "1" : "0";
           }
         }
       }
@@ -202,7 +211,7 @@ export function useScrollLayout(opts: {
       if (!nav) return;
       for (let i = 0; i < nav.children.length; i++) {
         const label = (nav.children[i] as HTMLElement).querySelector(".nav-label") as HTMLElement;
-        if (label) label.style.opacity = i === lastNavSection ? "1" : "0";
+        if (label) label.style.opacity = i === lastNavSection && labelsfit ? "1" : "0";
       }
     };
 

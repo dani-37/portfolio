@@ -231,7 +231,7 @@ export default function Hero({
         {mobile && (
           <button
             onClick={() => setSphereFocus(true)}
-            className="mt-6 font-grotesk font-light text-[13px] text-gray-muted opacity-90 cursor-pointer bg-transparent border-0 p-0 text-left hover:text-green-deep hover:opacity-100 transition-all duration-200">
+            className="mt-6 min-h-[44px] flex items-center font-grotesk font-light text-[13px] text-gray-muted opacity-90 cursor-pointer bg-transparent border-0 p-0 text-left hover:text-green-deep hover:opacity-100 transition-all duration-200">
             about the sphere ›
           </button>
         )}

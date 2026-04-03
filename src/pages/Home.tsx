@@ -69,6 +69,7 @@ export default function Home() {
   const navRef = useRef<HTMLDivElement>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const savedSection = useRef(-1);
+  const savedScrollY = useRef(0);
   const scrollHintRef = useRef<HTMLDivElement>(null);
   const mobileSectionRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
   const overlayScrollRef = useRef<HTMLDivElement>(null);
@@ -132,6 +133,7 @@ export default function Home() {
   useEffect(() => {
     if (!detail || window.innerWidth < 1024) return;
     function onWheel(e: WheelEvent) {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
       const el = overlayScrollRef.current;
       if (!el) return;
       el.scrollTop += e.deltaY;
@@ -189,6 +191,7 @@ export default function Home() {
 
   function openDetail(item: DetailItem, sectionIndex: number) {
     savedSection.current = sectionIndex;
+    savedScrollY.current = window.scrollY;
     hasNavigated.current = true;
     if (item?.type === "experience") {
       setSearchParams({ experience: item.id }, { replace: false });
@@ -209,7 +212,11 @@ export default function Home() {
         scrollToSection(idx - 1, false);
       }
     } else {
-      history.back();
+      const scrollY = savedScrollY.current;
+      setSearchParams({});
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: scrollY, behavior: "instant" });
+      });
     }
   }
 
@@ -240,13 +247,13 @@ export default function Home() {
   }
   if (detail?.type === "project") {
     const idx = PROJECT_REGISTRY.findIndex((p) => p.slug === detail.slug);
-    if (idx < PROJECT_REGISTRY.length - 1) {
-      prevDetail = { type: "project", slug: PROJECT_REGISTRY[idx + 1].slug };
-      prevLabel = PROJECT_REGISTRY[idx + 1].name;
-    }
     if (idx > 0) {
-      nextDetail = { type: "project", slug: PROJECT_REGISTRY[idx - 1].slug };
-      nextLabel = PROJECT_REGISTRY[idx - 1].name;
+      prevDetail = { type: "project", slug: PROJECT_REGISTRY[idx - 1].slug };
+      prevLabel = PROJECT_REGISTRY[idx - 1].name;
+    }
+    if (idx < PROJECT_REGISTRY.length - 1) {
+      nextDetail = { type: "project", slug: PROJECT_REGISTRY[idx + 1].slug };
+      nextLabel = PROJECT_REGISTRY[idx + 1].name;
     }
   }
 
@@ -337,7 +344,7 @@ export default function Home() {
     <>
       <ThemeToggle />
       {/* Desktop: scroll space (150vh per clip section) */}
-      <div className="hidden lg:block" style={{ height: "450vh" }} />
+      <div className="hidden lg:block" style={{ height: "360vh" }} />
 
       <TopoBackground />
       <main id="main-content">
@@ -392,7 +399,7 @@ export default function Home() {
         {/* Scroll hint — below card, wiped away by the line */}
         <div
           ref={scrollHintRef}
-          className="fixed z-0 flex flex-col items-center animate-hero-in [animation-delay:1000ms] group cursor-default"
+          className={`fixed z-0 flex flex-col items-center animate-hero-in [animation-delay:1000ms] group cursor-default ${detail ? "hidden" : ""}`}
           style={{
             top: "calc((50% + min(80vh, 530px) / 2 + 100vh) / 2 - 10px)",
             left: "calc(50% - min(92vw, 1058px) / 2)",
@@ -530,7 +537,7 @@ export default function Home() {
                 );
                 if (!project) return null;
                 return (
-                  <div className="pt-2 [&_article]:pt-4 [&_article]:pb-6 [&_img]:max-w-[45%] [&_img]:float-right [&_img]:ml-3">
+                  <div className="pt-2 [&_article]:pt-4 [&_article]:pb-6 [&_img:not(.img-full)]:max-w-[45%] [&_img:not(.img-full)]:float-right [&_img:not(.img-full)]:ml-3">
                     <ErrorBoundary>
                     <Suspense
                       fallback={
