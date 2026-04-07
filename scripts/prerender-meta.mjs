@@ -255,6 +255,10 @@ ${stack.length ? `<p>Stack: ${stack.join(", ")}</p>` : ""}
 
 const sitemapUrls = [
   { loc: `${BASE_URL}/`, priority: "1.0" },
+  ...experiences.map((e) => ({
+    loc: `${BASE_URL}/?experience=${encodeURIComponent(e.name)}`,
+    priority: "0.7",
+  })),
   ...projects.map((p) => ({
     loc: `${BASE_URL}/projects/${p.slug}`,
     priority: "0.8",
