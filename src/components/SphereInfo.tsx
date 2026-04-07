@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import firesMeta from "../data/fires_meta.json";
 
 
@@ -24,25 +24,23 @@ export default function SphereInfo({
   const [charIndex, setCharIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
 
-  const [finished, setFinished] = useState(false);
+  const doneRef = useRef(false);
 
   const reset = useCallback(() => {
     setSentenceIdx(0);
     setCharIndex(0);
     setPhase("idle");
+    doneRef.current = false;
   }, []);
 
   useEffect(() => {
     if (autoStart) {
-      setFinished(false);
       reset();
       setOpen(true);
-    } else if (!finished) {
+    } else {
       setOpen(false);
     }
-    // When finished, keep open=true so the done UI stays visible
-    // while the parent fades us out
-  }, [autoStart, reset, finished]);
+  }, [autoStart, reset]);
 
   useEffect(() => {
     if (!open) {
@@ -50,15 +48,16 @@ export default function SphereInfo({
       return;
     }
 
-    if (phase === "idle") {
-      setPhase("typing");
+    if (sentenceIdx >= SENTENCES.length) {
+      if (!doneRef.current) {
+        doneRef.current = true;
+        onDone?.();
+      }
       return;
     }
 
-    if (sentenceIdx >= SENTENCES.length) {
-      setPhase("idle");
-      setFinished(true);
-      onDone?.();
+    if (phase === "idle") {
+      setPhase("typing");
       return;
     }
 
@@ -86,7 +85,7 @@ export default function SphereInfo({
   return (
     <div className="h-[42px] flex items-center justify-center font-grotesk font-light text-[13px] leading-relaxed text-gray max-w-[350px] text-center">
       {open ? (
-        done ? (
+        done && !onDone ? (
           <span className="flex items-center justify-center gap-2">
             <a
               href="https://www.earthdata.nasa.gov/learn/find-data/near-real-time/firms/viirs-i-band-375-m-active-fire-data"
@@ -106,6 +105,8 @@ export default function SphereInfo({
               read again
             </button>
           </span>
+        ) : done ? (
+          <span>{SENTENCES[SENTENCES.length - 1]}</span>
         ) : (
           <span>
             {SENTENCES[sentenceIdx].slice(0, charIndex)}
@@ -115,7 +116,7 @@ export default function SphereInfo({
             </span>
           </span>
         )
-      ) : (
+      ) : onDone ? null : (
         <div className="flex flex-col items-center gap-2">
           <span className="text-gray-muted opacity-80">
             shaped by live wildfire data
